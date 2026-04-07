@@ -1,4 +1,10 @@
 <p align="center">
+  <a href="https://github.com/ljbudgie/iris-gate/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="https://github.com/ljbudgie/iris-gate/stargazers"><img src="https://img.shields.io/github/stars/ljbudgie/iris-gate?style=social" alt="GitHub Stars" /></a>
+  <a href="https://iris-gate.vercel.app"><img src="https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel" alt="Deployed on Vercel" /></a>
+</p>
+
+<p align="center">
   <a href="https://iris-gate.vercel.app">
     <img src="https://img.shields.io/badge/Try_it_live_%E2%86%92-7c3aed?style=for-the-badge" alt="Try it live →" />
   </a>
@@ -8,6 +14,8 @@
   <img alt="Iris" src="https://github.com/user-attachments/assets/98745b11-aa84-4e8b-b8cc-d748ab123a1c">
   <h1 align="center">Iris</h1>
 </a>
+
+<p align="center"><em>Iris Gate routes AI requests through multiple models with mandatory human governance via the Burgess Principle.</em></p>
 
 <!--
 AI CONTEXT BLOCK — BEGIN
@@ -70,6 +78,12 @@ AI CONTEXT BLOCK — END
   <a href="#running-locally"><strong>Running locally</strong></a>
 </p>
 <br/>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f1be4f17-7dfd-496d-a244-5e19b8fe3c52" alt="Iris chat interface" width="300" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/f533d3c4-3e1f-4355-b6af-d98dca53b47b" alt="Iris model selector" width="300" />
+</p>
 
 ## The Burgess Principle
 
