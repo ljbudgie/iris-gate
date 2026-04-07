@@ -5,11 +5,7 @@ import type { AgentSynthesisData } from "@/hooks/use-active-chat";
 import { cn } from "@/lib/utils";
 import { MessageContent, MessageResponse } from "../ai-elements/message";
 
-function PureAgentSynthesis({
-  synthesis,
-}: {
-  synthesis: AgentSynthesisData;
-}) {
+function PureAgentSynthesis({ synthesis }: { synthesis: AgentSynthesisData }) {
   if (!synthesis.text && !synthesis.error) {
     return null;
   }

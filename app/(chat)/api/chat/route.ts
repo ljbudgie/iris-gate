@@ -4,7 +4,6 @@ import {
   createUIMessageStream,
   createUIMessageStreamResponse,
   generateId,
-  generateText,
   stepCountIs,
   streamText,
 } from "ai";
@@ -12,6 +11,11 @@ import { checkBotId } from "botid/server";
 import { after } from "next/server";
 import { createResumableStreamContext } from "resumable-stream";
 import { auth, type UserType } from "@/app/(auth)/auth";
+import {
+  type ConversationContext,
+  getAgentProvider,
+  synthesiseResponses,
+} from "@/lib/agent";
 import { entitlementsByUserType } from "@/lib/ai/entitlements";
 import {
   allowedModelIds,
@@ -45,12 +49,6 @@ import { IrisError } from "@/lib/errors";
 import { checkIpRateLimit } from "@/lib/ratelimit";
 import type { ChatMessage } from "@/lib/types";
 import { convertToUIMessages, generateUUID } from "@/lib/utils";
-import {
-  synthesiseResponses,
-  getAgentProvider,
-  type ConversationContext,
-  type ModelResponse,
-} from "@/lib/agent";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
@@ -77,8 +75,14 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { id, message, messages, selectedChatModel, selectedVisibilityType, enableIrisAgent } =
-      requestBody;
+    const {
+      id,
+      message,
+      messages,
+      selectedChatModel,
+      selectedVisibilityType,
+      enableIrisAgent,
+    } = requestBody;
 
     const [, session] = await Promise.all([
       checkBotId().catch(() => null),
@@ -272,8 +276,7 @@ export async function POST(request: Request) {
               .join("") ?? "";
 
           if (baseText && userQuery) {
-            const modelName =
-              modelConfig?.name ?? chatModel;
+            const modelName = modelConfig?.name ?? chatModel;
 
             const agentContext: ConversationContext = {
               userQuery,
@@ -309,7 +312,8 @@ export async function POST(request: Request) {
                   attributions: [],
                   governanceStatus: "NULL",
                   agentProviderId: getAgentProvider().id,
-                  error: "Agent synthesis failed — base model response is unaffected.",
+                  error:
+                    "Agent synthesis failed — base model response is unaffected.",
                 }),
                 transient: false,
               });

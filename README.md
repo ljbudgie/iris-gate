@@ -75,6 +75,7 @@ AI CONTEXT BLOCK — END
   <a href="#the-burgess-principle"><strong>The Burgess Principle</strong></a> ·
   <a href="#what-makes-this-different"><strong>What Makes This Different</strong></a> ·
   <a href="#federation"><strong>Federation</strong></a> ·
+  <a href="#iris-agent--standalone-reasoning-layer-with-model-merging"><strong>Iris Agent</strong></a> ·
   <a href="#features"><strong>Features</strong></a> ·
   <a href="#model-providers"><strong>Model Providers</strong></a> ·
   <a href="#performance-characteristics"><strong>Performance</strong></a> ·
@@ -144,6 +145,55 @@ Iris is more than a chatbot — it's a **governance layer that enhances any AI b
 
 This means you can point any AI bot — your own fine-tuned model, a third-party API, an internal company LLM — at Iris and immediately gain the governance, attribution, and human-review guarantees that The Burgess Principle provides.
 
+## Iris Agent — Standalone Reasoning Layer with Model Merging
+
+The Iris Agent (`lib/agent/`) is a standalone reasoning layer that can operate independently while seamlessly merging with any underlying LLM response in the chatbot.
+
+### How it works
+
+1. **User sends a message** with the "Enable Iris Agent" toggle active (visible in the chat header as "Agent + Models").
+2. **Base model responds** — the selected model generates its response as normal via the AI Gateway.
+3. **Agent synthesis** — the Iris Agent receives the base model's response alongside the original user query and performs multi-step reasoning:
+   - **Analyse** each model response for accuracy, completeness, and relevance.
+   - **Critique** — identify factual errors, gaps, contradictions, or weak reasoning.
+   - **Synthesise** the best parts into a coherent, unified answer.
+   - **Extend** with its own knowledge where the base model fell short.
+4. **Governance gate** — the agent's synthesis passes through the same SOVEREIGN/NULL gate as all federated responses. The agent registers itself as a separate provider in the federation registry and starts as NULL until a human promotes it to SOVEREIGN.
+5. **Attribution** — the UI clearly shows which parts came from the base model and which from the agent's synthesis, with a dedicated "Agent Synthesis" section below the main response.
+
+### Example workflow
+
+```
+User: "What are the environmental impacts of lithium mining?"
+
+1. Kimi K2 generates a response covering water usage and habitat disruption.
+2. Iris Agent receives the query + Kimi K2's response.
+3. Agent analyses: "Response covers water and habitat but misses carbon
+   emissions, indigenous community impacts, and recycling alternatives."
+4. Agent synthesises a unified answer that includes all points, attributes
+   Kimi K2's contributions, and fills the gaps.
+5. Output passes through the SOVEREIGN/NULL gate (starts as NULL).
+6. User sees both the base model response and the Agent Synthesis section.
+```
+
+### Architecture
+
+| Component | Location | Purpose |
+|---|---|---|
+| Agent core | `lib/agent/iris-agent.ts` | Multi-step reasoning, synthesis, goal decomposition |
+| Agent types | `lib/agent/types.ts` | TypeScript types for agent data structures |
+| Agent memory | `lib/agent/memory.ts` | Short-term context + optional long-term fact storage |
+| Agent provider | `lib/agent/provider.ts` | Federation registry entry for governance |
+| Agent toggle | `components/chat/agent-toggle.tsx` | UI toggle in chat header |
+| Agent synthesis UI | `components/chat/agent-synthesis.tsx` | Displays synthesis results with attribution |
+
+### Key design decisions
+
+- **Governance-first**: the agent's own outputs go through the Burgess Principle gate. It registers as a separate federation provider with status NULL, meaning all agent syntheses are flagged for human review until the operator explicitly promotes the agent to SOVEREIGN.
+- **Non-blocking**: the agent step runs after the base model has finished streaming, so it doesn't delay the initial response. Users see the base model's answer immediately, then the agent synthesis appears below it.
+- **Tool calling**: the agent uses Vercel AI SDK tools for memory operations (storing and searching key facts) during synthesis.
+- **Model-agnostic**: the agent can use any registered model for its internal reasoning, independent of the model the user selected for the base response.
+
 ## Features
 
 - [Next.js](https://nextjs.org) App Router
@@ -168,6 +218,10 @@ This means you can point any AI bot — your own fine-tuned model, a third-party
   - Register external AI providers under a unified governance protocol
   - SOVEREIGN/NULL gate ensures every federated response is flagged for human review
   - Capability-based routing and transparent attribution across providers
+- [Iris Agent](#iris-agent--standalone-reasoning-layer-with-model-merging)
+  - Standalone reasoning layer that synthesises multi-model responses
+  - Tool calling, multi-step reasoning, and optional long-term memory
+  - Governed independently via the federation registry (starts as NULL)
 
 ## Model Providers
 

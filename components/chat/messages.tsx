@@ -134,16 +134,14 @@ function PureMessages({
             />
           )}
 
-          {agentSynthesis && agentSynthesis.text && (
+          {agentSynthesis?.text && (
             <div className="pl-10">
               <AgentSynthesis synthesis={agentSynthesis} />
               {enableIrisAgent && (
                 <div className="mt-2">
                   <FollowUpSuggestions
                     sendMessage={sendMessage}
-                    suggestions={[
-                      "Ask the Agent to refine this further",
-                    ]}
+                    suggestions={["Ask the Agent to refine this further"]}
                   />
                 </div>
               )}

@@ -1,20 +1,16 @@
 import { generateText, streamText, tool } from "ai";
 import { z } from "zod";
-import {
-  applyGovernanceGate,
-  evaluateResponses,
-} from "@/lib/federation/governance";
+import { applyGovernanceGate } from "@/lib/federation/governance";
 import type { ProviderResponse } from "@/lib/federation/types";
 import { generateUUID } from "@/lib/utils";
-import { getAgentProvider } from "./provider";
 import { getLanguageModel } from "../ai/providers";
-import { getAllFacts, searchFacts, storeFact } from "./memory";
+import { searchFacts, storeFact } from "./memory";
+import { getAgentProvider } from "./provider";
 import type {
   AgentSubtask,
   AgentSynthesisResult,
   ConversationContext,
   IrisAgentConfig,
-  ModelResponse,
   SynthesisAttribution,
 } from "./types";
 
@@ -49,10 +45,7 @@ Rules:
  */
 function buildSynthesisPrompt(context: ConversationContext): string {
   const responseSections = context.modelResponses
-    .map(
-      (r, i) =>
-        `### Model ${i + 1}: ${r.modelName}\n${r.content}`
-    )
+    .map((r, i) => `### Model ${i + 1}: ${r.modelName}\n${r.content}`)
     .join("\n\n---\n\n");
 
   return `## User Query
@@ -129,7 +122,7 @@ export async function synthesiseResponses(
         key: z.string().describe("A short label for the fact"),
         value: z.string().describe("The fact content"),
       }),
-      execute: async ({ key, value }) => {
+      execute: ({ key, value }) => {
         const fact = storeFact(key, value);
         return { stored: true, factId: fact.id };
       },
@@ -139,7 +132,7 @@ export async function synthesiseResponses(
       inputSchema: z.object({
         query: z.string().describe("Search query"),
       }),
-      execute: async ({ query }) => {
+      execute: ({ query }) => {
         const results = searchFacts(query);
         return {
           facts: results.map((f) => ({ key: f.key, value: f.value })),

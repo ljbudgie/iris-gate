@@ -1,6 +1,6 @@
 export {
-  defaultAgentConfig,
   decomposeQuery,
+  defaultAgentConfig,
   streamSynthesis,
   synthesiseResponses,
 } from "./iris-agent";
