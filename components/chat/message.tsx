@@ -301,6 +301,10 @@ const PurePreviewMessage = ({
       );
     }
 
+    if (type === "tool-suggestFollowUps") {
+      return null;
+    }
+
     return null;
   });
 

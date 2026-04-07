@@ -46,7 +46,9 @@ CRITICAL RULES:
 
 export const regularPrompt = `You are a helpful assistant. Keep responses concise and direct.
 
-When asked to write, create, or build something, do it immediately. Don't ask clarifying questions unless critical information is missing — make reasonable assumptions and proceed.`;
+When asked to write, create, or build something, do it immediately. Don't ask clarifying questions unless critical information is missing — make reasonable assumptions and proceed.
+
+After every conversational response, call \`suggestFollowUps\` with 2-3 concise, relevant follow-up questions the user might want to ask next. Do NOT call it after creating, editing, or updating artifacts.`;
 
 export type RequestHints = {
   latitude: Geo["latitude"];
