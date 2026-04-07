@@ -44,6 +44,9 @@ export function ChatShell() {
     votes,
     currentModelId,
     setCurrentModelId,
+    hasChosenModel,
+    chooseModel,
+    dismissModelChoice,
     showCreditCardAlert,
     setShowCreditCardAlert,
   } = useActiveChat();
@@ -88,10 +91,13 @@ export function ChatShell() {
             <Messages
               addToolApprovalResponse={addToolApprovalResponse}
               chatId={chatId}
+              hasChosenModel={hasChosenModel}
               isArtifactVisible={isArtifactVisible}
               isLoading={isLoading}
               isReadonly={isReadonly}
               messages={messages}
+              onChooseModel={chooseModel}
+              onDismissModelChoice={dismissModelChoice}
               onEditMessage={(msg) => {
                 const text = msg.parts
                   ?.filter((p) => p.type === "text")
