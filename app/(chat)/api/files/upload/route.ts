@@ -9,7 +9,7 @@ const FileSchema = z.object({
   file: z
     .instanceof(Blob)
     .refine((file) => file.size <= MAX_FILE_UPLOAD_SIZE_BYTES, {
-      message: "File size should be less than 5MB",
+      message: `File size should be less than ${MAX_FILE_UPLOAD_SIZE_BYTES / (1024 * 1024)}MB`,
     })
     .refine((file) => ["image/jpeg", "image/png"].includes(file.type), {
       message: "File type should be JPEG or PNG",
