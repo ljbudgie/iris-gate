@@ -3,12 +3,13 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { auth } from "@/app/(auth)/auth";
+import { MAX_FILE_UPLOAD_SIZE_BYTES } from "@/lib/constants";
 
 const FileSchema = z.object({
   file: z
     .instanceof(Blob)
-    .refine((file) => file.size <= 5 * 1024 * 1024, {
-      message: "File size should be less than 5MB",
+    .refine((file) => file.size <= MAX_FILE_UPLOAD_SIZE_BYTES, {
+      message: `File size should be less than ${MAX_FILE_UPLOAD_SIZE_BYTES / (1024 * 1024)}MB`,
     })
     .refine((file) => ["image/jpeg", "image/png"].includes(file.type), {
       message: "File type should be JPEG or PNG",
