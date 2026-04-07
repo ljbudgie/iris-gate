@@ -75,6 +75,7 @@ AI CONTEXT BLOCK — END
   <a href="#the-burgess-principle"><strong>The Burgess Principle</strong></a> ·
   <a href="#what-makes-this-different"><strong>What Makes This Different</strong></a> ·
   <a href="#federation"><strong>Federation</strong></a> ·
+  <a href="#friendly-iris-onboarding--simple-model-selection-shell"><strong>Onboarding</strong></a> ·
   <a href="#features"><strong>Features</strong></a> ·
   <a href="#model-providers"><strong>Model Providers</strong></a> ·
   <a href="#performance-characteristics"><strong>Performance</strong></a> ·
@@ -143,6 +144,20 @@ Iris is more than a chatbot — it's a **governance layer that enhances any AI b
 | `/api/federation/health` | `GET` | Health-check providers with latency tracking |
 
 This means you can point any AI bot — your own fine-tuned model, a third-party API, an internal company LLM — at Iris and immediately gain the governance, attribution, and human-review guarantees that The Burgess Principle provides.
+
+## Friendly Iris Onboarding – Simple Model Selection Shell
+
+When a new chat starts, Iris greets the user with a lightweight onboarding step before the first message:
+
+> **Hi! I'm Iris 👋**
+> I help route your requests across powerful models while enforcing human governance (SOVEREIGN/NULL via the Burgess Principle).
+> For this conversation, which model would you prefer?
+
+Clickable buttons for every model in the lineup are displayed, along with a **Dismiss — use smart default** option that picks the configured default model and skips straight to chatting.
+
+Once a model is chosen (or the default is accepted), the greeting transitions to the standard "What can I help with?" prompt and the normal chat flow continues — streaming, side-panel artifacts, and the existing SOVEREIGN/NULL gate with the "Mark as SOVEREIGN" button all work exactly as before.
+
+The onboarding is tracked per-chat via a `hasChosenModel` flag in the `ActiveChatContext`. Existing chats that already have messages skip the onboarding automatically. The feature adds no API calls, no loops, and no extra server-side logic — it is a single static UI step that reuses the existing model selector data and routing code.
 
 ## Features
 

@@ -9,6 +9,7 @@ import {
   type Dispatch,
   type ReactNode,
   type SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -45,6 +46,9 @@ type ActiveChatContextValue = {
   votes: Vote[] | undefined;
   currentModelId: string;
   setCurrentModelId: (id: string) => void;
+  hasChosenModel: boolean;
+  chooseModel: (id: string) => void;
+  dismissModelChoice: () => void;
   showCreditCardAlert: boolean;
   setShowCreditCardAlert: Dispatch<SetStateAction<boolean>>;
 };
@@ -78,6 +82,20 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     currentModelIdRef.current = currentModelId;
   }, [currentModelId]);
+
+  const [hasChosenModel, setHasChosenModel] = useState(false);
+
+  const chooseModel = useCallback(
+    (id: string) => {
+      setCurrentModelId(id);
+      setHasChosenModel(true);
+    },
+    [setCurrentModelId],
+  );
+
+  const dismissModelChoice = useCallback(() => {
+    setHasChosenModel(true);
+  }, []);
 
   const [input, setInput] = useState("");
   const [showCreditCardAlert, setShowCreditCardAlert] = useState(false);
@@ -193,12 +211,14 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       prevChatIdRef.current = chatId;
       if (isNewChat) {
         setMessages([]);
+        setHasChosenModel(false);
       }
     }
   }, [chatId, isNewChat, setMessages]);
 
   useEffect(() => {
     if (chatData && !isNewChat) {
+      setHasChosenModel(true);
       const cookieModel = document.cookie
         .split("; ")
         .find((row) => row.startsWith("chat-model="))
@@ -215,6 +235,7 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
     const query = params.get("query");
     if (query && !hasAppendedQueryRef.current) {
       hasAppendedQueryRef.current = true;
+      setHasChosenModel(true);
       window.history.replaceState(
         {},
         "",
@@ -262,6 +283,9 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       votes,
       currentModelId,
       setCurrentModelId,
+      hasChosenModel,
+      chooseModel,
+      dismissModelChoice,
       showCreditCardAlert,
       setShowCreditCardAlert,
     }),
@@ -281,6 +305,9 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       isLoading,
       votes,
       currentModelId,
+      hasChosenModel,
+      chooseModel,
+      dismissModelChoice,
       showCreditCardAlert,
     ]
   );
