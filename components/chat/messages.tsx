@@ -1,11 +1,12 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import { ArrowDownIcon } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useMessages } from "@/hooks/use-messages";
 import type { Vote } from "@/lib/db/schema";
 import type { ChatMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useDataStream } from "./data-stream-provider";
+import { FollowUpSuggestions } from "./follow-up-suggestions";
 import { Greeting } from "./greeting";
 import { PreviewMessage, ThinkingMessage } from "./message";
 
@@ -17,6 +18,7 @@ type MessagesProps = {
   messages: ChatMessage[];
   setMessages: UseChatHelpers<ChatMessage>["setMessages"];
   regenerate: UseChatHelpers<ChatMessage>["regenerate"];
+  sendMessage: UseChatHelpers<ChatMessage>["sendMessage"];
   isReadonly: boolean;
   isArtifactVisible: boolean;
   isLoading?: boolean;
@@ -32,6 +34,7 @@ function PureMessages({
   messages,
   setMessages,
   regenerate,
+  sendMessage,
   isReadonly,
   isArtifactVisible,
   isLoading,
@@ -58,6 +61,25 @@ function PureMessages({
       reset();
     }
   }, [chatId, reset]);
+
+  const followUpSuggestions = useMemo(() => {
+    if (status === "streaming" || status === "submitted" || isReadonly) {
+      return [];
+    }
+
+    const lastMessage = messages.at(-1);
+    if (lastMessage?.role !== "assistant") {
+      return [];
+    }
+
+    return lastMessage.parts
+      .filter(
+        (part) =>
+          part.type === "tool-suggestFollowUps" &&
+          part.state === "output-available"
+      )
+      .flatMap((part) => part.output?.suggestions ?? []);
+  }, [messages, status, isReadonly]);
 
   return (
     <div className="relative flex-1 bg-background">
@@ -98,6 +120,13 @@ function PureMessages({
               }
             />
           ))}
+
+          {followUpSuggestions.length > 0 && (
+            <FollowUpSuggestions
+              sendMessage={sendMessage}
+              suggestions={followUpSuggestions}
+            />
+          )}
 
           {status === "submitted" && messages.at(-1)?.role !== "assistant" && (
             <ThinkingMessage />
