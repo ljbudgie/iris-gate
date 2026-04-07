@@ -28,6 +28,19 @@ import { IrisError } from "@/lib/errors";
 import type { ChatMessage } from "@/lib/types";
 import { fetcher, fetchWithErrorHandlers, generateUUID } from "@/lib/utils";
 
+export type AgentSynthesisData = {
+  text: string;
+  attributions: Array<{
+    sourceId: string;
+    sourceName: string;
+    sourceType: "model" | "agent";
+    summary: string;
+  }>;
+  governanceStatus: "SOVEREIGN" | "NULL";
+  agentProviderId: string;
+  error?: string;
+};
+
 type ActiveChatContextValue = {
   chatId: string;
   messages: ChatMessage[];
@@ -47,6 +60,9 @@ type ActiveChatContextValue = {
   setCurrentModelId: (id: string) => void;
   showCreditCardAlert: boolean;
   setShowCreditCardAlert: Dispatch<SetStateAction<boolean>>;
+  enableIrisAgent: boolean;
+  setEnableIrisAgent: Dispatch<SetStateAction<boolean>>;
+  agentSynthesis: AgentSynthesisData | null;
 };
 
 const ActiveChatContext = createContext<ActiveChatContextValue | null>(null);
@@ -81,6 +97,14 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
 
   const [input, setInput] = useState("");
   const [showCreditCardAlert, setShowCreditCardAlert] = useState(false);
+  const [enableIrisAgent, setEnableIrisAgent] = useState(false);
+  const [agentSynthesis, setAgentSynthesis] =
+    useState<AgentSynthesisData | null>(null);
+
+  const enableIrisAgentRef = useRef(enableIrisAgent);
+  useEffect(() => {
+    enableIrisAgentRef.current = enableIrisAgent;
+  }, [enableIrisAgent]);
 
   const { data: chatData, isLoading } = useSWR(
     isNewChat
@@ -146,16 +170,29 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
               : { message: lastMessage }),
             selectedChatModel: currentModelIdRef.current,
             selectedVisibilityType: visibility,
+            enableIrisAgent: enableIrisAgentRef.current,
             ...request.body,
           },
         };
       },
     }),
     onData: (dataPart) => {
+      if (dataPart.type === "data-agent-synthesis") {
+        try {
+          const parsed = JSON.parse(
+            String(dataPart.data)
+          ) as AgentSynthesisData;
+          setAgentSynthesis(parsed);
+        } catch {
+          /* ignore parse errors */
+        }
+        return;
+      }
       setDataStream((ds) => (ds ? [...ds, dataPart] : []));
     },
     onFinish: () => {
       mutate(unstable_serialize(getChatHistoryPaginationKey));
+      // Clear agent synthesis when new response finishes (will be set again if agent runs)
     },
     onError: (error) => {
       if (error.message?.includes("AI Gateway requires a valid credit card")) {
@@ -264,6 +301,9 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       setCurrentModelId,
       showCreditCardAlert,
       setShowCreditCardAlert,
+      enableIrisAgent,
+      setEnableIrisAgent,
+      agentSynthesis,
     }),
     [
       chatId,
@@ -282,6 +322,8 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
       votes,
       currentModelId,
       showCreditCardAlert,
+      enableIrisAgent,
+      agentSynthesis,
     ]
   );
 

@@ -4,6 +4,7 @@ import {
   createUIMessageStream,
   createUIMessageStreamResponse,
   generateId,
+  generateText,
   stepCountIs,
   streamText,
 } from "ai";
@@ -44,6 +45,12 @@ import { IrisError } from "@/lib/errors";
 import { checkIpRateLimit } from "@/lib/ratelimit";
 import type { ChatMessage } from "@/lib/types";
 import { convertToUIMessages, generateUUID } from "@/lib/utils";
+import {
+  synthesiseResponses,
+  getAgentProvider,
+  type ConversationContext,
+  type ModelResponse,
+} from "@/lib/agent";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
@@ -70,7 +77,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { id, message, messages, selectedChatModel, selectedVisibilityType } =
+    const { id, message, messages, selectedChatModel, selectedVisibilityType, enableIrisAgent } =
       requestBody;
 
     const [, session] = await Promise.all([
@@ -252,6 +259,63 @@ export async function POST(request: Request) {
         dataStream.merge(
           result.toUIMessageStream({ sendReasoning: isReasoningModel })
         );
+
+        // Agent-enhanced mode: after the base model responds, run synthesis
+        if (enableIrisAgent && !isToolApprovalFlow) {
+          const baseText = await result.text;
+          const userQuery =
+            uiMessages
+              .filter((m) => m.role === "user")
+              .at(-1)
+              ?.parts?.filter((p) => p.type === "text")
+              .map((p) => p.text)
+              .join("") ?? "";
+
+          if (baseText && userQuery) {
+            const modelName =
+              modelConfig?.name ?? chatModel;
+
+            const agentContext: ConversationContext = {
+              userQuery,
+              modelResponses: [
+                {
+                  modelId: chatModel,
+                  modelName,
+                  content: baseText,
+                  respondedAt: new Date().toISOString(),
+                },
+              ],
+            };
+
+            try {
+              const synthesis = await synthesiseResponses(agentContext);
+
+              dataStream.write({
+                type: "data-agent-synthesis",
+                data: JSON.stringify({
+                  text: synthesis.synthesisText,
+                  attributions: synthesis.attributions,
+                  governanceStatus: synthesis.governanceStatus,
+                  agentProviderId: synthesis.agentProviderId,
+                }),
+                transient: false,
+              });
+            } catch (agentError) {
+              console.error("Iris Agent synthesis failed:", agentError);
+              dataStream.write({
+                type: "data-agent-synthesis",
+                data: JSON.stringify({
+                  text: "",
+                  attributions: [],
+                  governanceStatus: "NULL",
+                  agentProviderId: getAgentProvider().id,
+                  error: "Agent synthesis failed — base model response is unaffected.",
+                }),
+                transient: false,
+              });
+            }
+          }
+        }
 
         if (titlePromise) {
           const title = await titlePromise;

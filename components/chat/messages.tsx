@@ -1,10 +1,12 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import { ArrowDownIcon } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
+import type { AgentSynthesisData } from "@/hooks/use-active-chat";
 import { useMessages } from "@/hooks/use-messages";
 import type { Vote } from "@/lib/db/schema";
 import type { ChatMessage } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { AgentSynthesis } from "./agent-synthesis";
 import { useDataStream } from "./data-stream-provider";
 import { FollowUpSuggestions } from "./follow-up-suggestions";
 import { Greeting } from "./greeting";
@@ -24,6 +26,8 @@ type MessagesProps = {
   isLoading?: boolean;
   selectedModelId: string;
   onEditMessage?: (message: ChatMessage) => void;
+  agentSynthesis?: AgentSynthesisData | null;
+  enableIrisAgent?: boolean;
 };
 
 function PureMessages({
@@ -40,6 +44,8 @@ function PureMessages({
   isLoading,
   selectedModelId: _selectedModelId,
   onEditMessage,
+  agentSynthesis,
+  enableIrisAgent,
 }: MessagesProps) {
   const {
     containerRef: messagesContainerRef,
@@ -126,6 +132,22 @@ function PureMessages({
               sendMessage={sendMessage}
               suggestions={followUpSuggestions}
             />
+          )}
+
+          {agentSynthesis && agentSynthesis.text && (
+            <div className="pl-10">
+              <AgentSynthesis synthesis={agentSynthesis} />
+              {enableIrisAgent && (
+                <div className="mt-2">
+                  <FollowUpSuggestions
+                    sendMessage={sendMessage}
+                    suggestions={[
+                      "Ask the Agent to refine this further",
+                    ]}
+                  />
+                </div>
+              )}
+            </div>
           )}
 
           {status === "submitted" && messages.at(-1)?.role !== "assistant" && (

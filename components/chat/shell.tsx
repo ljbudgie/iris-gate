@@ -46,6 +46,9 @@ export function ChatShell() {
     setCurrentModelId,
     showCreditCardAlert,
     setShowCreditCardAlert,
+    enableIrisAgent,
+    setEnableIrisAgent,
+    agentSynthesis,
   } = useActiveChat();
 
   const [editingMessage, setEditingMessage] = useState<ChatMessage | null>(
@@ -80,14 +83,18 @@ export function ChatShell() {
         >
           <ChatHeader
             chatId={chatId}
+            enableIrisAgent={enableIrisAgent}
             isReadonly={isReadonly}
+            onToggleAgent={setEnableIrisAgent}
             selectedVisibilityType={visibilityType}
           />
 
           <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-background md:rounded-tl-[16px] md:border-t md:border-l md:border-border/30">
             <Messages
               addToolApprovalResponse={addToolApprovalResponse}
+              agentSynthesis={agentSynthesis}
               chatId={chatId}
+              enableIrisAgent={enableIrisAgent}
               isArtifactVisible={isArtifactVisible}
               isLoading={isLoading}
               isReadonly={isReadonly}
