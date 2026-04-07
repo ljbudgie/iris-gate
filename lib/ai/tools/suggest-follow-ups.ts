@@ -11,6 +11,8 @@ export const suggestFollowUps = tool({
       .max(3)
       .describe("2-3 concise, relevant follow-up questions"),
   }),
+  // Pass-through: the model generates suggestions via tool call and the UI
+  // extracts them from the tool output to render as clickable chips.
   execute: ({ suggestions }) => {
     return { suggestions };
   },
