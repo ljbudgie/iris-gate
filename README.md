@@ -80,9 +80,9 @@ AI CONTEXT BLOCK — END
 <br/>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/f1be4f17-7dfd-496d-a244-5e19b8fe3c52" alt="Iris chat interface" width="300" />
+  <img src="https://github.com/user-attachments/assets/4378028b-7dee-4e03-a5c1-0a8b9e601dff" alt="Iris chat interface" width="300" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/f533d3c4-3e1f-4355-b6af-d98dca53b47b" alt="Iris model selector" width="300" />
+  <img src="https://github.com/user-attachments/assets/dd678baa-41fb-42cf-98bf-e2b982619ef4" alt="Iris model selector" width="300" />
 </p>
 
 ## The Burgess Principle
