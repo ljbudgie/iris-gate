@@ -64,7 +64,10 @@ export function SidebarUserNav({ user }: { user: User }) {
                     background: `linear-gradient(135deg, oklch(0.35 0.15 ${emailToHue(user.email ?? "")}), oklch(0.25 0.1 ${emailToHue(user.email ?? "") + 40}))`,
                   }}
                 />
-                <span className="truncate text-[12px] font-medium" data-testid="user-email">
+                <span
+                  className="truncate text-[12px] font-medium"
+                  data-testid="user-email"
+                >
                   {isGuest ? "Guest" : user?.email}
                 </span>
                 {isGuest && (
@@ -77,7 +80,7 @@ export function SidebarUserNav({ user }: { user: User }) {
             )}
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-popper-anchor-width) rounded-lg border border-border/60 bg-card/95 backdrop-blur-xl shadow-[var(--shadow-float)]"
+            className="w-(--radix-popper-anchor-width) rounded-lg border border-border/30 backdrop-blur-xl shadow-[var(--shadow-float)]"
             data-testid="user-nav-menu"
             side="top"
           >

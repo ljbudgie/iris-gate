@@ -91,8 +91,7 @@
   --null-review: oklch(0.7 0.12 55);
   --null-review-bg: oklch(0.7 0.12 55 / 0.1);
 
-  --shadow-card:
-    0 1px 3px oklch(0 0 0 / 0.3), 0 1px 2px oklch(0 0 0 / 0.2);
+  --shadow-card: 0 1px 3px oklch(0 0 0 / 0.3), 0 1px 2px oklch(0 0 0 / 0.2);
   --shadow-float:
     0 0 0 1px oklch(0.55 0.2 275 / 0.08), 0 16px 48px -6px oklch(0 0 0 / 0.4),
     0 6px 12px -2px oklch(0 0 0 / 0.25);

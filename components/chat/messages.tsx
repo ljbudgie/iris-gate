@@ -92,11 +92,7 @@ function PureMessages({
           messages.length > 0 ? "" : "bg-transparent"
         )}
         ref={messagesContainerRef}
-        style={
-          isArtifactVisible
-            ? { scrollbarWidth: "none" }
-            : undefined
-        }
+        style={isArtifactVisible ? { scrollbarWidth: "none" } : undefined}
       >
         <div className="mx-auto flex min-h-full min-w-0 max-w-4xl flex-col gap-5 px-2 py-6 md:gap-7 md:px-4">
           {messages.map((message, index) => (

@@ -308,7 +308,10 @@ function PureArtifact({
   const artifactPanel = (
     <>
       {sidebarState !== "collapsed" && (
-        <div className="flex h-[calc(3.5rem+1px)] shrink-0 items-center justify-between border-b border-border/30 px-4" style={{ background: "var(--surface-0)" }}>
+        <div
+          className="flex h-[calc(3.5rem+1px)] shrink-0 items-center justify-between border-b border-border/30 px-4"
+          style={{ background: "var(--surface-0)" }}
+        >
           <div className="flex items-center gap-3">
             <ArtifactCloseButton />
             <div className="flex flex-col gap-0.5">
@@ -336,7 +339,10 @@ function PureArtifact({
                   <div className="h-3 w-24 animate-pulse rounded bg-muted-foreground/10" />
                 )}
                 {documents && documents.length > 1 && (
-                  <div className="rounded-md px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-muted-foreground/50" style={{ background: "var(--surface-2)" }}>
+                  <div
+                    className="rounded-md px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-muted-foreground/50"
+                    style={{ background: "var(--surface-2)" }}
+                  >
                     v{currentVersionIndex + 1}/{documents.length}
                   </div>
                 )}
@@ -348,7 +354,6 @@ function PureArtifact({
       <div
         className="relative flex-1 overflow-y-auto"
         data-slot="artifact-content"
-        style={{ background: "var(--surface-1)" }}
         onScroll={() => {
           const el = artifactContentRef.current;
           if (!el) {
@@ -359,6 +364,7 @@ function PureArtifact({
           userScrolledArtifact.current = !atBottom;
         }}
         ref={artifactContentRef}
+        style={{ background: "var(--surface-1)" }}
       >
         <artifactDefinition.content
           content={

@@ -16,7 +16,9 @@ export const Greeting = () => {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/federation/register`
       );
-      if (!res.ok) return;
+      if (!res.ok) {
+        return;
+      }
       const providers: { governanceStatus: string }[] = await res.json();
       setProviderCount(providers.length);
       if (providers.length === 0) {
@@ -37,7 +39,10 @@ export const Greeting = () => {
   }, [refreshGovernance]);
 
   return (
-    <div className="flex w-full max-w-2xl flex-col items-center gap-8 px-4" key="overview">
+    <div
+      className="flex w-full max-w-2xl flex-col items-center gap-8 px-4"
+      key="overview"
+    >
       {/* Iris brand mark */}
       <motion.div
         animate={{ opacity: 1, scale: 1 }}
@@ -65,7 +70,10 @@ export const Greeting = () => {
         initial={{ opacity: 0, y: 12 }}
         transition={{ delay: 0.25, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3" style={{ background: "var(--surface-1)" }}>
+        <div
+          className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3"
+          style={{ background: "var(--surface-1)" }}
+        >
           <div
             className={`size-2 rounded-full ${
               governanceStatus === "SOVEREIGN"
@@ -78,13 +86,15 @@ export const Greeting = () => {
           <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground/60">
             Federation
           </span>
-          <span className={`text-[11px] font-semibold ${
-            governanceStatus === "SOVEREIGN"
-              ? "text-sovereign"
-              : governanceStatus === "NULL"
-                ? "text-null-review"
-                : "text-muted-foreground/40"
-          }`}>
+          <span
+            className={`text-[11px] font-semibold ${
+              governanceStatus === "SOVEREIGN"
+                ? "text-sovereign"
+                : governanceStatus === "NULL"
+                  ? "text-null-review"
+                  : "text-muted-foreground/40"
+            }`}
+          >
             {governanceStatus === "SOVEREIGN"
               ? "Active"
               : governanceStatus === "NULL"
@@ -93,7 +103,10 @@ export const Greeting = () => {
           </span>
         </div>
 
-        <div className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3" style={{ background: "var(--surface-1)" }}>
+        <div
+          className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3"
+          style={{ background: "var(--surface-1)" }}
+        >
           <span className="text-lg font-bold tabular-nums text-foreground/80">
             {providerCount}
           </span>
@@ -105,14 +118,19 @@ export const Greeting = () => {
           </span>
         </div>
 
-        <div className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3" style={{ background: "var(--surface-1)" }}>
-          <span className={`text-[13px] font-bold ${
-            governanceStatus === "SOVEREIGN"
-              ? "text-sovereign"
-              : governanceStatus === "NULL"
-                ? "text-null-review"
-                : "text-muted-foreground/30"
-          }`}>
+        <div
+          className="flex flex-col items-center gap-1.5 rounded-lg border border-border/30 p-3"
+          style={{ background: "var(--surface-1)" }}
+        >
+          <span
+            className={`text-[13px] font-bold ${
+              governanceStatus === "SOVEREIGN"
+                ? "text-sovereign"
+                : governanceStatus === "NULL"
+                  ? "text-null-review"
+                  : "text-muted-foreground/30"
+            }`}
+          >
             {governanceStatus === "NO_PROVIDERS" ? "—" : governanceStatus}
           </span>
           <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground/60">

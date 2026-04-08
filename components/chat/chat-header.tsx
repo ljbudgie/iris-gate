@@ -33,7 +33,9 @@ function PureChatHeader({
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/federation/register`
       );
-      if (!res.ok) return;
+      if (!res.ok) {
+        return;
+      }
       const providers: { governanceStatus: string }[] = await res.json();
       setProviderCount(providers.length);
       if (providers.length === 0) {
@@ -62,7 +64,10 @@ function PureChatHeader({
   }
 
   return (
-    <header className="sticky top-0 z-10 flex flex-col" style={{ background: "var(--surface-0)" }}>
+    <header
+      className="sticky top-0 z-10 flex flex-col"
+      style={{ background: "var(--surface-0)" }}
+    >
       {/* Federation status bar */}
       <div
         aria-label={
@@ -76,11 +81,12 @@ function PureChatHeader({
         className="flex h-8 items-center justify-between gap-2 border-b border-border/30 px-3 text-[11px] font-medium tracking-wide uppercase transition-colors duration-300"
         role="status"
         style={{
-          background: governanceStatus === "SOVEREIGN"
-            ? "var(--sovereign-bg)"
-            : governanceStatus === "NULL"
-              ? "var(--null-review-bg)"
-              : "var(--surface-1)",
+          background:
+            governanceStatus === "SOVEREIGN"
+              ? "var(--sovereign-bg)"
+              : governanceStatus === "NULL"
+                ? "var(--null-review-bg)"
+                : "var(--surface-1)",
         }}
       >
         <div className="flex items-center gap-2">
@@ -94,13 +100,15 @@ function PureChatHeader({
                     : "bg-muted-foreground/30"
               }`}
             />
-            <span className={
-              governanceStatus === "SOVEREIGN"
-                ? "text-sovereign"
-                : governanceStatus === "NULL"
-                  ? "text-null-review"
-                  : "text-muted-foreground/50"
-            }>
+            <span
+              className={
+                governanceStatus === "SOVEREIGN"
+                  ? "text-sovereign"
+                  : governanceStatus === "NULL"
+                    ? "text-null-review"
+                    : "text-muted-foreground/50"
+              }
+            >
               {governanceStatus === "SOVEREIGN"
                 ? "Federation Active"
                 : governanceStatus === "NULL"
@@ -113,20 +121,25 @@ function PureChatHeader({
             {providerCount} {providerCount === 1 ? "provider" : "providers"}
           </span>
           <span className="text-muted-foreground/30">·</span>
-          <span className={
-            governanceStatus === "SOVEREIGN"
-              ? "text-sovereign"
-              : governanceStatus === "NULL"
-                ? "text-null-review"
-                : "text-muted-foreground/40"
-          }>
+          <span
+            className={
+              governanceStatus === "SOVEREIGN"
+                ? "text-sovereign"
+                : governanceStatus === "NULL"
+                  ? "text-null-review"
+                  : "text-muted-foreground/40"
+            }
+          >
             {governanceStatus === "NO_PROVIDERS" ? "—" : governanceStatus}
           </span>
         </div>
       </div>
 
       {/* Main header bar */}
-      <div className="flex h-12 items-center gap-2 border-b border-border/20 px-3" style={{ background: "var(--surface-0)" }}>
+      <div
+        className="flex h-12 items-center gap-2 border-b border-border/20 px-3"
+        style={{ background: "var(--surface-0)" }}
+      >
         <Button
           className="md:hidden"
           onClick={toggleSidebar}
@@ -143,7 +156,9 @@ function PureChatHeader({
           <div className="flex size-6 items-center justify-center rounded-md bg-primary/15 text-primary">
             <SparklesIcon size={13} />
           </div>
-          <span className="text-sm font-bold tracking-tight text-foreground">IRIS</span>
+          <span className="text-sm font-bold tracking-tight text-foreground">
+            IRIS
+          </span>
         </Link>
 
         {!isReadonly && (

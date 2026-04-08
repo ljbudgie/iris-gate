@@ -349,7 +349,10 @@ const PurePreviewMessage = ({
       >
         {isAssistant && (
           <div className="flex h-[calc(13px*1.65)] shrink-0 items-center">
-            <div className="flex size-7 items-center justify-center rounded-lg text-primary ring-1 ring-primary/20" style={{ background: "var(--surface-2)" }}>
+            <div
+              className="flex size-7 items-center justify-center rounded-lg text-primary ring-1 ring-primary/20"
+              style={{ background: "var(--surface-2)" }}
+            >
               <SparklesIcon size={13} />
             </div>
           </div>
@@ -386,7 +389,10 @@ export const ThinkingMessage = () => {
     >
       <div className="flex items-start gap-3">
         <div className="flex h-[calc(13px*1.65)] shrink-0 items-center">
-          <div className="flex size-7 items-center justify-center rounded-lg text-primary ring-1 ring-primary/20" style={{ background: "var(--surface-2)" }}>
+          <div
+            className="flex size-7 items-center justify-center rounded-lg text-primary ring-1 ring-primary/20"
+            style={{ background: "var(--surface-2)" }}
+          >
             <SparklesIcon size={13} />
           </div>
         </div>

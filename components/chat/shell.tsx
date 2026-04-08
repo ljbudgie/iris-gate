@@ -72,7 +72,10 @@ export function ChatShell() {
 
   return (
     <>
-      <div className="flex h-dvh w-full flex-row overflow-hidden" style={{ background: "var(--surface-0)" }}>
+      <div
+        className="flex h-dvh w-full flex-row overflow-hidden"
+        style={{ background: "var(--surface-0)" }}
+      >
         <div
           className={cn(
             "flex min-w-0 flex-1 flex-col transition-[flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
@@ -87,7 +90,10 @@ export function ChatShell() {
             selectedVisibilityType={visibilityType}
           />
 
-          <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden md:rounded-tl-[16px] md:border-t md:border-l md:border-border/20" style={{ background: "var(--surface-1)" }}>
+          <div
+            className="relative flex min-h-0 flex-1 flex-col overflow-hidden md:rounded-tl-[16px] md:border-t md:border-l md:border-border/20"
+            style={{ background: "var(--surface-1)" }}
+          >
             <ActionPlan messages={messages} />
             <Messages
               addToolApprovalResponse={addToolApprovalResponse}
@@ -111,7 +117,10 @@ export function ChatShell() {
               votes={votes}
             />
 
-            <div className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 px-2 pb-3 md:px-4 md:pb-4" style={{ background: "var(--surface-1)" }}>
+            <div
+              className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 px-2 pb-3 md:px-4 md:pb-4"
+              style={{ background: "var(--surface-1)" }}
+            >
               {!isReadonly && (
                 <MultimodalInput
                   attachments={attachments}
