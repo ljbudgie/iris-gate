@@ -75,12 +75,13 @@ export function ChatShell() {
       <div className="flex h-dvh w-full flex-row overflow-hidden">
         <div
           className={cn(
-            "flex min-w-0 flex-col bg-sidebar transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
-            isArtifactVisible ? "w-[40%]" : "w-full"
+            "flex min-w-0 flex-1 flex-col bg-sidebar transition-[flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            isArtifactVisible ? "md:max-w-[50%] lg:max-w-[45%]" : "w-full"
           )}
         >
           <ChatHeader
             chatId={chatId}
+            currentModelId={currentModelId}
             isReadonly={isReadonly}
             selectedVisibilityType={visibilityType}
           />

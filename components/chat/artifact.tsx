@@ -287,7 +287,7 @@ function PureArtifact({
   if (!artifact.isVisible && !isMobile) {
     return (
       <div
-        className="h-dvh w-0 shrink-0 overflow-hidden transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="h-dvh w-0 shrink-0 overflow-hidden transition-[width,flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         data-testid="artifact"
       />
     );
@@ -453,7 +453,7 @@ function PureArtifact({
 
   return (
     <div
-      className="flex h-dvh w-[60%] shrink-0 flex-col overflow-hidden border-l border-border/50 bg-sidebar transition-[width] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+      className="flex h-dvh min-w-0 flex-1 flex-col overflow-hidden border-l border-border/50 bg-sidebar transition-[flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
       data-testid="artifact"
     >
       {artifactPanel}

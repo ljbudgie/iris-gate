@@ -810,10 +810,7 @@ export async function getChatTokenUsage({ chatId }: { chatId: string }) {
       .from(chatAuditLog)
       .where(eq(chatAuditLog.chatId, chatId));
 
-    return entries.reduce(
-      (sum, entry) => sum + (entry.totalTokens ?? 0),
-      0
-    );
+    return entries.reduce((sum, entry) => sum + (entry.totalTokens ?? 0), 0);
   } catch (_error) {
     throw new IrisError(
       "bad_request:database",
