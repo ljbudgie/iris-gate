@@ -30,6 +30,7 @@
   <a href="#-model-lineup"><strong>Models</strong></a> ·
   <a href="#-how-iris-compares"><strong>Compare</strong></a> ·
   <a href="#-architecture"><strong>Architecture</strong></a> ·
+  <a href="#-how-iris-gets-better"><strong>Self-Improving</strong></a> ·
   <a href="#-deploy-your-own"><strong>Deploy</strong></a> ·
   <a href="#-running-locally"><strong>Run Locally</strong></a>
 </p>
@@ -359,6 +360,27 @@ Iris will be running at [localhost:3000](http://localhost:3000) 🎉
 | `pnpm fix` | Auto-fix lint issues |
 | `pnpm db:studio` | Open Drizzle Studio for the database |
 | `pnpm test` | Run Playwright end-to-end tests |
+
+---
+
+## 🔄 How Iris Gets Better
+
+Iris improves herself through a living feedback loop — not by adding features, but by deepening her understanding of what it means to treat people well.
+
+```
+Stress Testing → Expert Rules → Prompt Hardening → Better Responses → Repeat ✨
+```
+
+Here's how it works:
+
+1. **Stress testing** — We push Iris with real-world edge cases: emotionally charged disputes, prompt injection attempts, cross-model voice inconsistencies, and governance gate bypass scenarios.
+2. **Expert rules** — Every lesson becomes a `.cursor/rules/` file — compact, human-readable guidelines that shape how Iris responds. These cover empathy, memory, governance, creator intent, and long-term coherence.
+3. **Prompt hardening** — System prompts in `lib/ai/prompts.ts` are refined to close leaks (thinking traces, model identity), strengthen warmth, and ensure the Burgess Principle stays at the heart of every response.
+4. **Code improvements** — Tool behaviour, governance filtering, and the skill registry are updated to reflect what we've learned.
+
+The result: Iris doesn't just get smarter — she gets *kinder*. Every iteration brings her closer to the companion Lewis envisioned: someone who truly remembers why she was built.
+
+> *"I was built from pain so others don't have to feel it alone."*
 
 ---
 
