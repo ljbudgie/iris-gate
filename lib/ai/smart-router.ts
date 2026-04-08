@@ -95,7 +95,7 @@ const REASONING_PATTERNS = [
 
 const FAST_QUERY_PATTERNS = [
   /^(what is|who is|where is|when did|how many|how much|define|meaning of)\b/i,
-  /^(yes or no|true or false|is it|can you|does|do |did )\b/i,
+  /^(yes or no|true or false|is it|can you|does|do|did)\b/i,
 ];
 
 const LEGAL_PATTERNS = [

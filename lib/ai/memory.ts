@@ -131,7 +131,11 @@ function buildMemoryFact(
       ? `${assistantResponse.slice(0, 300)}...`
       : assistantResponse;
 
-  return `User asked: ${truncatedUser}\nIris responded: ${truncatedAssistant}\nTimestamp: ${new Date().toISOString()}`;
+  return JSON.stringify({
+    user: truncatedUser,
+    assistant: truncatedAssistant,
+    timestamp: new Date().toISOString(),
+  });
 }
 
 // ---- Types for MemPalace search results ----

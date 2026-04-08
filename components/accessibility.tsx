@@ -184,7 +184,9 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
 
       // Remove after announcement
       setTimeout(() => {
-        document.body.removeChild(el);
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
       }, 1000);
     },
     [settings.screenReaderAnnouncements]

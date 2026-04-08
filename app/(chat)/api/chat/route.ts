@@ -322,12 +322,9 @@ export async function POST(request: Request) {
           : "";
         const enhancedSystemPrompt = `${irisIdentity}\n\n${basePrompt}${templateInstruction}`;
 
-        // Send routing label to client if auto-routed
+        // Log routing decision for observability
         if (routingLabel) {
-          dataStream.write({
-            type: "data-routing-label" as "data-chat-title",
-            data: routingLabel,
-          });
+          console.log(`[Iris] ${routingLabel}`);
         }
 
         const result = streamText({
