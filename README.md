@@ -19,6 +19,8 @@
   Pick a model or let Iris choose for you. Fast responses, clean UI, built-in safeguards.
 </p>
 
+> **Origin Story** — Iris was built in a single day on a 2022 iPhone by someone who only discovered GitHub in January 2026. Proof that you don't need a fancy setup — just the Burgess Principle spirit and a dream.
+
 <p align="center">
   <a href="#hi-im-iris-"><strong>Meet Iris</strong></a> ·
   <a href="#-features"><strong>Features</strong></a> ·
