@@ -52,7 +52,6 @@ import {
   PromptInputTools,
 } from "../ai-elements/prompt-input";
 import { Button } from "../ui/button";
-import { GuidedIntake } from "./guided-intake";
 import { PaperclipIcon, StopIcon } from "./icons";
 import { PreviewAttachment } from "./preview-attachment";
 import {
@@ -393,14 +392,11 @@ function PureMultimodalInput({
         messages.length === 0 &&
         attachments.length === 0 &&
         uploadQueue.length === 0 && (
-          <div className="flex flex-col items-center gap-4">
-            <GuidedIntake chatId={chatId} sendMessage={sendMessage} />
-            <SuggestedActions
-              chatId={chatId}
-              selectedVisibilityType={selectedVisibilityType}
-              sendMessage={sendMessage}
-            />
-          </div>
+          <SuggestedActions
+            chatId={chatId}
+            selectedVisibilityType={selectedVisibilityType}
+            sendMessage={sendMessage}
+          />
         )}
 
       <input

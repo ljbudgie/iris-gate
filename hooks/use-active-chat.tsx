@@ -83,15 +83,12 @@ export function ActiveChatProvider({ children }: { children: ReactNode }) {
     currentModelIdRef.current = currentModelId;
   }, [currentModelId]);
 
-  const [hasChosenModel, setHasChosenModel] = useState(false);
+  const [hasChosenModel, setHasChosenModel] = useState(true);
 
-  const chooseModel = useCallback(
-    (id: string) => {
-      setCurrentModelId(id);
-      setHasChosenModel(true);
-    },
-    [setCurrentModelId]
-  );
+  const chooseModel = useCallback((id: string) => {
+    setCurrentModelId(id);
+    setHasChosenModel(true);
+  }, []);
 
   const dismissModelChoice = useCallback(() => {
     setHasChosenModel(true);
