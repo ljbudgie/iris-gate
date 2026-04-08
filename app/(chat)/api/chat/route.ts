@@ -17,6 +17,7 @@ import {
   countAssistantTurns,
 } from "@/lib/ai/conversation-budget";
 import { entitlementsByUserType } from "@/lib/ai/entitlements";
+import { queryMemoryContext } from "@/lib/ai/memory";
 import {
   allowedModelIds,
   chatModels,
@@ -25,6 +26,14 @@ import {
 } from "@/lib/ai/models";
 import { type RequestHints, systemPrompt } from "@/lib/ai/prompts";
 import { getLanguageModel } from "@/lib/ai/providers";
+import {
+  AUTO_MODEL_ID,
+  extractTextFromParts,
+  hasFileAttachments,
+  routeMessage,
+} from "@/lib/ai/smart-router";
+import { buildIrisSystemPrompt } from "@/lib/ai/system-prompt";
+import { detectTemplate } from "@/lib/ai/templates";
 // Skill registry: built-in skills are registered as a side-effect import.
 // This replaces the individual tool imports with a single registry lookup.
 import "@/lib/ai/skills/built-in";
@@ -88,9 +97,37 @@ export async function POST(request: Request) {
       return new IrisError("unauthorized:chat").toResponse();
     }
 
-    const chatModel = allowedModelIds.has(selectedChatModel)
-      ? selectedChatModel
-      : DEFAULT_CHAT_MODEL;
+    // -----------------------------------------------------------------------
+    // Smart Routing: if "auto" is selected, analyse the message and pick
+    // the optimal model. Otherwise use the manually selected model.
+    // -----------------------------------------------------------------------
+    let chatModel: string;
+    let routingLabel: string | undefined;
+
+    if (
+      selectedChatModel === AUTO_MODEL_ID ||
+      !allowedModelIds.has(selectedChatModel)
+    ) {
+      // Extract text from the latest user message for routing analysis
+      const latestText = message?.parts
+        ? extractTextFromParts(
+            message.parts as Array<{ type: string; text?: string }>
+          )
+        : "";
+      const hasFiles = message?.parts
+        ? hasFileAttachments(message.parts as Array<{ type: string }>)
+        : false;
+
+      if (latestText) {
+        const routing = routeMessage(latestText, hasFiles);
+        chatModel = routing.modelId;
+        routingLabel = `Routed to ${routing.modelName} · ${routing.reason}`;
+      } else {
+        chatModel = DEFAULT_CHAT_MODEL;
+      }
+    } else {
+      chatModel = selectedChatModel;
+    }
 
     await checkIpRateLimit(ipAddress(request));
 
@@ -248,9 +285,51 @@ export async function POST(request: Request) {
           governanceStatus
         );
 
+        // ---------------------------------------------------------------
+        // Intelligence layer: memory, templates, and routing label
+        // ---------------------------------------------------------------
+        const latestUserText = message?.parts
+          ? extractTextFromParts(
+              message.parts as Array<{ type: string; text?: string }>
+            )
+          : "";
+
+        // Query MemPalace for relevant user context (non-blocking fallback)
+        let memoryContext: string | undefined;
+        try {
+          memoryContext = latestUserText
+            ? await queryMemoryContext(latestUserText)
+            : undefined;
+        } catch (err) {
+          console.error("[Iris] Memory context query failed:", err);
+        }
+
+        // Detect the appropriate response template
+        const templateResult = latestUserText
+          ? detectTemplate(latestUserText)
+          : undefined;
+
+        // Build the enhanced system prompt
+        const modelName =
+          chatModels.find((m) => m.id === chatModel)?.name ?? chatModel;
+        const irisIdentity = buildIrisSystemPrompt({
+          modelName,
+          memoryContext,
+        });
+        const basePrompt = systemPrompt({ requestHints, supportsTools });
+        const templateInstruction = templateResult
+          ? `\n\n${templateResult.instruction}`
+          : "";
+        const enhancedSystemPrompt = `${irisIdentity}\n\n${basePrompt}${templateInstruction}`;
+
+        // Log routing decision for observability
+        if (routingLabel) {
+          console.log(`[Iris] ${routingLabel}`);
+        }
+
         const result = streamText({
           model: getLanguageModel(chatModel),
-          system: systemPrompt({ requestHints, supportsTools }),
+          system: enhancedSystemPrompt,
           messages: modelMessages,
           stopWhen: stepCountIs(5),
           experimental_activeTools: activeTools,

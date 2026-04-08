@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
@@ -10,8 +10,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme inline {
-  --font-jetbrains: 'JetBrains Mono', ui-monospace, monospace;
-  --font-geist-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-jetbrains: "JetBrains Mono", ui-monospace, monospace;
+  --font-geist-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
 
   --color-iris-bg: #08080c;
   --color-iris-surface: #0f0f14;
@@ -564,4 +564,46 @@
 
 [data-testid="artifact"] {
   isolation: isolate;
+}
+
+/* Accessibility: High contrast mode */
+.high-contrast {
+  --surface-0: #000000;
+  --surface-1: #0a0a0a;
+  --surface-2: #141414;
+  --surface-3: #1e1e1e;
+}
+
+.high-contrast * {
+  border-color: #555 !important;
+}
+
+.high-contrast .text-\[\#52525b\] {
+  color: #888 !important;
+}
+
+.high-contrast .text-\[\#a1a1aa\] {
+  color: #ccc !important;
+}
+
+/* Accessibility: Reduced motion */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
