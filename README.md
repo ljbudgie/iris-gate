@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/ljbudgie/iris-gate/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="https://github.com/ljbudgie/iris-gate/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT_%2B_Burgess_Principle-7c3aed.svg" alt="MIT + Burgess Principle License" /></a>
   <a href="https://github.com/ljbudgie/iris-gate/stargazers"><img src="https://img.shields.io/github/stars/ljbudgie/iris-gate?style=social" alt="GitHub Stars" /></a>
   <a href="https://iris-gate.vercel.app"><img src="https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel" alt="Deployed on Vercel" /></a>
 </p>
@@ -68,7 +68,7 @@ Most AI chatbots are wrappers around a single model focused on general productiv
 
 | Feature | Iris | ChatGPT | Claude | Gemini | Copilot |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Open source (MIT)** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Open source** | ✅ MIT + BP | ❌ | ❌ | ❌ | ❌ |
 | **Multi-model routing** | ✅ 8 models | ❌ Single | ❌ Single | ❌ Single | ❌ Single |
 | **Automatic provider failover** | ✅ 5 providers | ❌ | ❌ | ❌ | ❌ |
 | **Human-review governance gate** | ✅ SOVEREIGN/NULL | ❌ | ❌ | ❌ | ❌ |
@@ -179,4 +179,12 @@ Contributions are welcome! Feel free to open an issue or submit a pull request. 
 
 ## 📄 License
 
-This project is open source under the [MIT License](LICENSE).
+This project uses a **dual-licence model** aligned with [The Burgess Principle](https://github.com/ljbudgie/burgess-principle):
+
+| What | Licence |
+|---|---|
+| **Source code** (application logic, UI, tooling) | [MIT](LICENSE) — fork, modify, build freely |
+| **Burgess Principle content** (doctrine, templates, prompts, branding) | Free for personal use; [commercial licence required](LICENSE) |
+| **"The Burgess Principle"** name & certification mark | Protected trademark (UK00004343685) |
+
+See [LICENSE](LICENSE) and [DISCLAIMER](DISCLAIMER.md) for full details.

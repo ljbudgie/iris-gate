@@ -1,21 +1,65 @@
-MIT License
+# Licensing & How Iris Can Be Used
 
-Copyright (c) 2025 LJ Burgess
+Hi 👋
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Iris is an open-source AI assistant built on **[The Burgess Principle](https://github.com/ljbudgie/burgess-principle)** (UK Certification Mark UK00004343685), created by Lewis James Burgess. This licence reflects the same principles used in the Burgess Principle repository.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Code — MIT Licence
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The underlying source code (application logic, UI components, API routes, configuration, build tooling, and repository structure) is available under the MIT licence:
+
+> MIT License
+>
+> Copyright (c) 2025 LJ Burgess
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+>
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+>
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.
+
+## Burgess Principle Content — Free for Personal Use
+
+The Burgess Principle doctrine, letter templates, prompt content, governance framework, and all associated materials embedded in this repository are **free for personal use**.
+
+This includes:
+- Using Iris to generate letters for your own personal matters
+- Forking and running your own private instance
+- Sharing it with family, friends, or others who need it
+
+No permission or payment is required for personal use.
+
+## Commercial or Professional Use Requires a Licence
+
+If you are a law firm, barrister, claims-management company, charity, business, or any organisation wanting to use the Burgess Principle content (letter templates, governance framework, doctrine, or prompt materials) embedded in Iris in a **professional, commercial, or group-litigation** capacity, you must obtain a paid licence from the creator.
+
+This includes offering services based on the principle, the templates, or the framework to clients or members.
+
+## Trademark Protection
+
+"The Burgess Principle" and the certification mark **UK00004343685** are protected trademarks. Unauthorised commercial use of the name or branded elements may constitute trademark infringement.
+
+## Summary
+
+| What | Licence |
+|---|---|
+| Source code, UI, tooling, repo structure | MIT — fork, modify, and build freely |
+| Burgess Principle doctrine, templates, prompts, branding | Free for personal use; commercial licence required |
+| "The Burgess Principle" name & certification mark | Protected trademark (UK00004343685) |
+
+For commercial licensing enquiries or questions about permitted use, please email: lewisburgess_1987@hotmail.co.uk
+
+Take care,
+LJ
