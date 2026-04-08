@@ -1,6 +1,6 @@
 {
-  "id": "408ce51e-8602-4656-bb9e-5dd7e6dd76e3",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "ec9a7fa7-bda9-47f6-80a4-f2b03e8e5ac9",
+  "prevId": "408ce51e-8602-4656-bb9e-5dd7e6dd76e3",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -97,24 +97,24 @@
         },
         "promptTokens": {
           "name": "promptTokens",
-          "type": "json",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'0'::json"
+          "notNull": true,
+          "default": 0
         },
         "completionTokens": {
           "name": "completionTokens",
-          "type": "json",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'0'::json"
+          "notNull": true,
+          "default": 0
         },
         "totalTokens": {
           "name": "totalTokens",
-          "type": "json",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'0'::json"
+          "notNull": true,
+          "default": 0
         },
         "toolsInvoked": {
           "name": "toolsInvoked",

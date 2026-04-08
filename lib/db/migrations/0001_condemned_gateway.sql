@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS "ChatAuditLog" (
 	"messageId" uuid,
 	"userId" uuid NOT NULL,
 	"modelId" varchar(128),
-	"promptTokens" json DEFAULT '0'::json,
-	"completionTokens" json DEFAULT '0'::json,
-	"totalTokens" json DEFAULT '0'::json,
+	"promptTokens" integer DEFAULT 0 NOT NULL,
+	"completionTokens" integer DEFAULT 0 NOT NULL,
+	"totalTokens" integer DEFAULT 0 NOT NULL,
 	"toolsInvoked" json DEFAULT '[]'::json,
 	"governanceStatus" varchar,
 	"createdAt" timestamp DEFAULT now() NOT NULL

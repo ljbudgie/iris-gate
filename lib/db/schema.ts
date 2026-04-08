@@ -2,6 +2,7 @@ import type { InferSelectModel } from "drizzle-orm";
 import {
   boolean,
   foreignKey,
+  integer,
   json,
   pgTable,
   primaryKey,
@@ -169,11 +170,11 @@ export const chatAuditLog = pgTable("ChatAuditLog", {
   /** The model used for this turn. */
   modelId: varchar("modelId", { length: 128 }),
   /** Number of prompt tokens consumed. */
-  promptTokens: json("promptTokens").$type<number>().default(0),
+  promptTokens: integer("promptTokens").notNull().default(0),
   /** Number of completion tokens consumed. */
-  completionTokens: json("completionTokens").$type<number>().default(0),
+  completionTokens: integer("completionTokens").notNull().default(0),
   /** Total tokens consumed in this turn. */
-  totalTokens: json("totalTokens").$type<number>().default(0),
+  totalTokens: integer("totalTokens").notNull().default(0),
   /** Tool names invoked during this turn, stored as JSON array. */
   toolsInvoked: json("toolsInvoked").$type<string[]>().default([]),
   /** Governance status at time of response. */

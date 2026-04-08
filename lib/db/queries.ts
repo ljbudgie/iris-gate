@@ -811,7 +811,7 @@ export async function getChatTokenUsage({ chatId }: { chatId: string }) {
       .where(eq(chatAuditLog.chatId, chatId));
 
     return entries.reduce(
-      (sum, entry) => sum + ((entry.totalTokens as number) ?? 0),
+      (sum, entry) => sum + (entry.totalTokens ?? 0),
       0
     );
   } catch (_error) {
