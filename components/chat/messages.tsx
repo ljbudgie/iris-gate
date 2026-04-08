@@ -80,7 +80,7 @@ function PureMessages({
   }, [messages, status, isReadonly]);
 
   return (
-    <div className="relative flex-1 bg-background">
+    <div className="relative flex-1" style={{ background: "var(--surface-1)" }}>
       {messages.length === 0 && !isLoading && (
         <div className="pointer-events-auto absolute inset-0 z-10 flex items-center justify-center">
           <Greeting />
@@ -89,10 +89,14 @@ function PureMessages({
       <div
         className={cn(
           "absolute inset-0 touch-pan-y overflow-y-auto",
-          messages.length > 0 ? "bg-background" : "bg-transparent"
+          messages.length > 0 ? "" : "bg-transparent"
         )}
         ref={messagesContainerRef}
-        style={isArtifactVisible ? { scrollbarWidth: "none" } : undefined}
+        style={
+          isArtifactVisible
+            ? { scrollbarWidth: "none" }
+            : undefined
+        }
       >
         <div className="mx-auto flex min-h-full min-w-0 max-w-4xl flex-col gap-5 px-2 py-6 md:gap-7 md:px-4">
           {messages.map((message, index) => (
@@ -139,12 +143,13 @@ function PureMessages({
 
       <button
         aria-label="Scroll to bottom"
-        className={`absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center rounded-full border border-border/40 bg-card/95 px-3.5 shadow-[var(--shadow-float)] backdrop-blur-md transition-all duration-200 h-7 text-[10px] ${
+        className={`absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center rounded-full border border-border/30 px-3.5 shadow-[var(--shadow-float)] backdrop-blur-md transition-all duration-200 h-7 text-[10px] ${
           isAtBottom
             ? "pointer-events-none scale-90 opacity-0"
             : "pointer-events-auto scale-100 opacity-100"
         }`}
         onClick={() => scrollToBottom("smooth")}
+        style={{ background: "var(--surface-2)" }}
         type="button"
       >
         <ArrowDownIcon className="size-3 text-muted-foreground" />

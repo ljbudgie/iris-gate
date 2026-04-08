@@ -55,19 +55,24 @@ export function SidebarUserNav({ user }: { user: User }) {
               </SidebarMenuButton>
             ) : (
               <SidebarMenuButton
-                className="h-8 px-2 rounded-lg bg-transparent text-sidebar-foreground/70 transition-colors duration-150 hover:text-sidebar-foreground data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                className="h-8 px-2 rounded-lg bg-transparent text-sidebar-foreground/60 transition-colors duration-150 hover:text-sidebar-foreground data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 data-testid="user-nav-button"
               >
                 <div
-                  className="size-5 shrink-0 rounded-full ring-1 ring-sidebar-border/50"
+                  className="size-5 shrink-0 rounded-full ring-1 ring-primary/30"
                   style={{
-                    background: `linear-gradient(135deg, oklch(0.35 0.08 ${emailToHue(user.email ?? "")}), oklch(0.25 0.05 ${emailToHue(user.email ?? "") + 40}))`,
+                    background: `linear-gradient(135deg, oklch(0.35 0.15 ${emailToHue(user.email ?? "")}), oklch(0.25 0.1 ${emailToHue(user.email ?? "") + 40}))`,
                   }}
                 />
-                <span className="truncate text-[13px]" data-testid="user-email">
+                <span className="truncate text-[12px] font-medium" data-testid="user-email">
                   {isGuest ? "Guest" : user?.email}
                 </span>
-                <ChevronUp className="ml-auto size-3.5 text-sidebar-foreground/50" />
+                {isGuest && (
+                  <span className="ml-auto rounded border border-border/30 px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-muted-foreground/50">
+                    Guest
+                  </span>
+                )}
+                <ChevronUp className="ml-auto size-3.5 text-sidebar-foreground/40" />
               </SidebarMenuButton>
             )}
           </DropdownMenuTrigger>
