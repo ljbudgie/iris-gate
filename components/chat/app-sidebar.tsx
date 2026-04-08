@@ -77,7 +77,10 @@ export function AppSidebar({ user }: { user: User | undefined }) {
       );
       setGovernanceLabel(allSovereign ? "SOVEREIGN" : "NULL");
     } catch {
-      // silent — governance badge is non-critical
+      // Governance badge is non-critical; log in dev for debugging
+      if (process.env.NODE_ENV === "development") {
+        console.warn("Failed to fetch governance status");
+      }
     }
   }, []);
 

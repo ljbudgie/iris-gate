@@ -16,7 +16,8 @@ export async function GET() {
   try {
     const entries = await getAuditLogByUserId({ userId: session.user.id });
     return Response.json(entries);
-  } catch {
+  } catch (error) {
+    console.error("Failed to fetch audit log:", error);
     return new IrisError("bad_request:database").toResponse();
   }
 }

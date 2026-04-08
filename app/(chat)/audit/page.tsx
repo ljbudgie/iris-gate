@@ -20,7 +20,7 @@ export default function AuditLogPage() {
       const data = await res.json();
       setEntries(data);
     } catch {
-      toast.error("Failed to load audit log.");
+      toast.error("Failed to load audit log. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
     }
