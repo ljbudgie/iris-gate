@@ -68,7 +68,7 @@ Most AI chatbots are wrappers around a single model focused on general productiv
 
 | Feature | Iris | ChatGPT | Claude | Gemini | Copilot |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Open source** | ✅ MIT + BP | ❌ | ❌ | ❌ | ❌ |
+| **Open source** | ✅ [MIT + BP](LICENSE) | ❌ | ❌ | ❌ | ❌ |
 | **Multi-model routing** | ✅ 8 models | ❌ Single | ❌ Single | ❌ Single | ❌ Single |
 | **Automatic provider failover** | ✅ 5 providers | ❌ | ❌ | ❌ | ❌ |
 | **Human-review governance gate** | ✅ SOVEREIGN/NULL | ❌ | ❌ | ❌ | ❌ |
