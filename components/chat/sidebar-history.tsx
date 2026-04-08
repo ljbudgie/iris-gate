@@ -44,6 +44,7 @@ export type ChatHistory = {
 };
 
 const PAGE_SIZE = 20;
+const MIN_CHATS_FOR_SEARCH = 3;
 
 const groupChatsByDate = (chats: Chat[]): GroupedChats => {
   const now = new Date();
@@ -246,7 +247,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
         </SidebarGroupLabel>
         <SidebarGroupContent>
           {/* Search filter */}
-          {allChats.length > 3 && (
+          {allChats.length > MIN_CHATS_FOR_SEARCH && (
             <div className="mb-2 px-1.5">
               <div className="relative">
                 <SearchIcon className="pointer-events-none absolute left-2.5 top-1/2 size-3 -translate-y-1/2 text-sidebar-foreground/30" />
