@@ -20,7 +20,6 @@ import { IrisError } from "../errors";
 import { generateUUID } from "../utils";
 import {
   type Chat,
-  type ChatAuditLog,
   chat,
   chatAuditLog,
   type DBMessage,
@@ -128,9 +127,7 @@ export async function deleteAllChatsByUserId({ userId }: { userId: string }) {
 
     const chatIds = userChats.map((c) => c.id);
 
-    await db
-      .delete(chatAuditLog)
-      .where(inArray(chatAuditLog.chatId, chatIds));
+    await db.delete(chatAuditLog).where(inArray(chatAuditLog.chatId, chatIds));
     await db
       .delete(humanReviewRequest)
       .where(inArray(humanReviewRequest.chatId, chatIds));
@@ -800,10 +797,7 @@ export async function getChatAuditLog({ chatId }: { chatId: string }) {
       .where(eq(chatAuditLog.chatId, chatId))
       .orderBy(asc(chatAuditLog.createdAt));
   } catch (_error) {
-    throw new IrisError(
-      "bad_request:database",
-      "Failed to get chat audit log"
-    );
+    throw new IrisError("bad_request:database", "Failed to get chat audit log");
   }
 }
 
@@ -818,7 +812,7 @@ export async function getChatTokenUsage({ chatId }: { chatId: string }) {
 
     return entries.reduce(
       (sum, entry) => sum + ((entry.totalTokens as number) ?? 0),
-      0,
+      0
     );
   } catch (_error) {
     throw new IrisError(

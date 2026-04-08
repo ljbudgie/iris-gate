@@ -30,7 +30,7 @@ export type BudgetCheckResult =
  */
 export function checkBudget(
   budget: ConversationBudget,
-  usage: BudgetUsage,
+  usage: BudgetUsage
 ): BudgetCheckResult {
   if (usage.turnCount >= budget.maxTurns) {
     return { allowed: false, reason: "turn_limit_exceeded" };
@@ -47,8 +47,6 @@ export function checkBudget(
  * Count assistant turns from a list of DB messages.
  * Each message with role "assistant" counts as one turn.
  */
-export function countAssistantTurns(
-  messages: { role: string }[],
-): number {
+export function countAssistantTurns(messages: { role: string }[]): number {
   return messages.filter((m) => m.role === "assistant").length;
 }

@@ -12,9 +12,9 @@ import { after } from "next/server";
 import { createResumableStreamContext } from "resumable-stream";
 import { auth, type UserType } from "@/app/(auth)/auth";
 import {
+  type ConversationBudget,
   checkBudget,
   countAssistantTurns,
-  type ConversationBudget,
 } from "@/lib/ai/conversation-budget";
 import { entitlementsByUserType } from "@/lib/ai/entitlements";
 import {
@@ -40,16 +40,16 @@ import {
   getChatTokenUsage,
   getMessageCountByUserId,
   getMessagesByChatId,
-  saveChatAuditEntry,
   saveChat,
+  saveChatAuditEntry,
   saveMessages,
   updateChatTitleById,
   updateMessage,
 } from "@/lib/db/queries";
 import type { DBMessage } from "@/lib/db/schema";
 import { IrisError } from "@/lib/errors";
-import { getPermittedTools, type ToolName } from "@/lib/federation";
 import type { GovernanceStatus } from "@/lib/federation";
+import { getPermittedTools, type ToolName } from "@/lib/federation";
 import { checkIpRateLimit } from "@/lib/ratelimit";
 import type { ChatMessage } from "@/lib/types";
 import { convertToUIMessages, generateUUID } from "@/lib/utils";
@@ -223,9 +223,7 @@ export async function POST(request: Request) {
     const permittedTools: ToolName[] = getPermittedTools(governanceStatus);
 
     const activeTools: ToolName[] =
-      isReasoningModel && !supportsTools
-        ? []
-        : permittedTools;
+      isReasoningModel && !supportsTools ? [] : permittedTools;
 
     const modelMessages = await convertToModelMessages(uiMessages);
 
@@ -286,7 +284,7 @@ export async function POST(request: Request) {
         const toolCalls = await result.toolCalls;
 
         const toolsInvoked = toolCalls.map(
-          (tc: { toolName: string }) => tc.toolName,
+          (tc: { toolName: string }) => tc.toolName
         );
 
         // Audit trail: persist turn metadata (non-blocking)
@@ -294,8 +292,8 @@ export async function POST(request: Request) {
           chatId: id,
           userId: session.user?.id ?? "",
           modelId: chatModel,
-          promptTokens: usage?.promptTokens ?? 0,
-          completionTokens: usage?.completionTokens ?? 0,
+          promptTokens: usage?.inputTokens ?? 0,
+          completionTokens: usage?.outputTokens ?? 0,
           totalTokens: usage?.totalTokens ?? 0,
           toolsInvoked,
           governanceStatus: governanceStatus ?? "SOVEREIGN",

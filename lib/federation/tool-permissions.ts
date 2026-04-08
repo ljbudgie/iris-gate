@@ -53,7 +53,7 @@ const ALL_TOOLS: readonly ToolName[] = [
  * all tools are returned.
  */
 export function getPermittedTools(
-  governanceStatus: GovernanceStatus | undefined,
+  governanceStatus: GovernanceStatus | undefined
 ): ToolName[] {
   if (governanceStatus === "NULL") {
     return ALL_TOOLS.filter((tool) => !SENSITIVE_TOOLS.has(tool));
@@ -68,7 +68,7 @@ export function getPermittedTools(
  */
 export function isToolPermitted(
   toolName: ToolName,
-  governanceStatus: GovernanceStatus | undefined,
+  governanceStatus: GovernanceStatus | undefined
 ): boolean {
   if (governanceStatus === "NULL") {
     return !SENSITIVE_TOOLS.has(toolName);
