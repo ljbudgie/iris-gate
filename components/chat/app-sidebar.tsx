@@ -168,6 +168,21 @@ export function AppSidebar({ user }: { user: User | undefined }) {
           <SidebarHistory user={user} />
         </SidebarContent>
         <SidebarFooter className="border-t border-sidebar-border pt-2 pb-3">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className="h-7 cursor-default rounded-lg text-[11px] hover:bg-transparent"
+                tooltip="Burgess Principle — NULL: awaiting human review"
+              >
+                <div className="flex size-4 items-center justify-center">
+                  <div className="size-1.5 rounded-full bg-amber-500/80" />
+                </div>
+                <span className="font-medium text-muted-foreground/60">
+                  NULL — awaiting review
+                </span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
           {user && <SidebarUserNav user={user} />}
         </SidebarFooter>
         <SidebarRail />
