@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/ljbudgie/iris-gate/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT_%2B_Burgess_Principle-7c3aed.svg" alt="MIT + Burgess Principle License" /></a>
-  <a href="https://github.com/ljbudgie/iris-gate/stargazers"><img src="https://img.shields.io/github/stars/ljbudgie/iris-gate?style=social" alt="GitHub Stars" /></a>
+  <a href="https://github.com/ljbudgie/Iris/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT_%2B_Burgess_Principle-7c3aed.svg" alt="MIT + Burgess Principle License" /></a>
+  <a href="https://github.com/ljbudgie/Iris/stargazers"><img src="https://img.shields.io/github/stars/ljbudgie/Iris?style=social" alt="GitHub Stars" /></a>
   <a href="https://iris-gate.vercel.app"><img src="https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel" alt="Deployed on Vercel" /></a>
 </p>
 
@@ -145,7 +145,7 @@ Iris uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) to route a
 
 Get your own Iris up and running with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ljbudgie/iris-gate)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ljbudgie/Iris)
 
 ---
 
