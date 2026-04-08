@@ -24,6 +24,7 @@
 <p align="center">
   <a href="#hi-im-iris-"><strong>Meet Iris</strong></a> ·
   <a href="#-features"><strong>Features</strong></a> ·
+  <a href="#-skills--tools"><strong>Skills</strong></a> ·
   <a href="#-how-iris-compares"><strong>Compare</strong></a> ·
   <a href="#-the-burgess-principle"><strong>Burgess Principle</strong></a> ·
   <a href="#-model-lineup"><strong>Models</strong></a> ·
@@ -41,7 +42,7 @@
 
 When you open Iris, you're greeted with a friendly onboarding step — clickable buttons for every model in the lineup, plus a **"Dismiss — use smart default"** option that picks the best model and drops you straight into chatting. No config screens, no API key juggling, no friction.
 
-Once you pick a model (or let Iris decide), you get the full experience: streaming responses, side-panel artifacts for documents and code, Burgess Principle letter generation, and a polished dark-mode UI that feels premium from the first click.
+Once you pick a model (or let Iris decide), you get the full experience: streaming responses, side-panel artifacts for documents and code, Burgess Principle letter generation, an extensible skill registry with governance-aware filtering, and a polished dark-mode UI that feels premium from the first click.
 
 ---
 
@@ -51,6 +52,9 @@ Once you pick a model (or let Iris decide), you get the full experience: streami
 - **⚖️ Burgess Principle governance** — SOVEREIGN/NULL gate ensures every AI output is flagged for human review before reaching vulnerable users ([learn more](#-the-burgess-principle))
 - **📝 Burgess Principle letters** — 18 personalised letter templates for challenging automated decisions, requesting data access, and asserting your rights
 - **🔍 Human-impact scanner** — Flags changes across 7 areas (accessibility, privacy, security, user language, billing, automated decisions, deployment) for human review
+- **🧩 Extensible skill registry** — Self-declaring tools with metadata, governance-aware filtering, and a factory pattern for context-dependent skills ([learn more](#-skills--tools))
+- **💬 Follow-up suggestions** — AI-generated follow-up questions after each response to keep the conversation flowing
+- **🧠 MemPalace memory** — Optional [MemPalace](https://github.com/ljbudgie/mempalace) integration with 3 MCP tools (search, store, status) for persistent, structured AI memory
 - **📊 Audit trail** — Per-turn logging of model usage, token consumption, tools invoked, and governance status
 - **💰 Conversation budgets** — Per-chat turn and token limits to prevent cost overruns (guest: 20 turns / 50K tokens, registered: 80 turns / 200K tokens)
 - **🎨 Beautiful UI** — Custom violet accent palette, spring animations, dark mode, built with [shadcn/ui](https://ui.shadcn.com) + [Tailwind CSS](https://tailwindcss.com) + [Radix UI](https://radix-ui.com)
@@ -61,6 +65,48 @@ Once you pick a model (or let Iris decide), you get the full experience: streami
 - **🌍 Country-aware legal guidance** — Geolocation-based selection of the right legal framework (UK GDPR, US CCPA/ADA, EU GDPR, AU Privacy Act, CA PIPEDA)
 - **🔐 Auth.js** — Credential and guest authentication with tiered rate limits
 - **🚀 One-click deploy** — Get your own Iris instance running on Vercel in minutes
+
+---
+
+## 🧩 Skills & Tools
+
+Iris uses a **SkillRegistry** — a self-declaring, governance-aware tool registration layer. Each skill declares its own metadata (name, description, sensitivity, tags, context requirements) so the registry can enforce Burgess Principle governance rules automatically. Skills are defined in [`lib/ai/skills/`](lib/ai/skills/).
+
+### Built-in Skills
+
+| Skill | Description | Sensitivity | Tags |
+|---|---|:---:|---|
+| `getWeather` | Current weather by city name or coordinates | standard | utility, external-api |
+| `createDocument` | Create a new artifact (code, text, or spreadsheet) | standard | artifact, document |
+| `editDocument` | Edit an existing artifact using find-and-replace | standard | artifact, document |
+| `updateDocument` | Full rewrite of an existing artifact | standard | artifact, document |
+| `requestSuggestions` | Generate AI suggestions for an existing document | standard | artifact, document, suggestions |
+| `suggestFollowUps` | Suggest 2–3 follow-up questions based on the conversation | standard | conversational, ux |
+| `generateBurgessLetter` | Generate a personalised Burgess Principle letter from 18 templates | **sensitive** | burgess-principle, legal, advocacy |
+| `mempalaceSearch` | Search the user's MemPalace for relevant memories | standard | mempalace, memory, search |
+| `mempalaceStore` | Store verbatim content in the user's MemPalace | standard | mempalace, memory, write |
+| `mempalaceStatus` | Get MemPalace status and wake-up context | standard | mempalace, memory, status |
+
+> The 3 MemPalace skills are **conditional** — they only register when the `MEMPALACE_MCP_COMMAND` environment variable is set.
+
+### Governance-Aware Filtering
+
+Skills declare a **sensitivity** level:
+
+- **`standard`** — safe for use without human review (informational or editorial)
+- **`sensitive`** — produces formal outputs that could materially affect a user's legal or financial situation; requires **SOVEREIGN** governance status
+
+When governance is **NULL**, the registry automatically excludes sensitive skills. When governance is **SOVEREIGN** (or when no governance layer is active), all skills are available. This filtering is handled by [`skillRegistry.buildTools()`](lib/ai/skills/registry.ts) and [`skillRegistry.getPermittedNames()`](lib/ai/skills/registry.ts).
+
+### Extending with Custom Skills
+
+Adding a new skill takes three steps:
+
+1. Create your tool in `lib/ai/tools/` using the [Vercel AI SDK `tool()` helper](https://ai-sdk.dev)
+2. Define a `SkillDefinition` with metadata (name, sensitivity, tags) in [`lib/ai/skills/built-in.ts`](lib/ai/skills/built-in.ts)
+3. Call `skillRegistry.register(yourSkill)` — the registry handles governance filtering automatically
+
+Context-free skills export a pre-built `tool`; skills that need runtime context (session, dataStream, modelId) use a `factory` function instead.
 
 ---
 
@@ -79,6 +125,7 @@ Most AI chatbots are wrappers around a single model focused on general productiv
 | **Per-turn audit trail** | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Conversation budgets** | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Country-aware legal guidance** | ✅ 5 jurisdictions | ❌ | ❌ | ❌ | ❌ |
+| **Extensible skill registry** | ✅ 10 skills | ❌ | ❌ | ❌ | ❌ |
 | **Self-hostable** | ✅ One-click | ❌ | ❌ | ❌ | ❌ |
 | **Free to use** | ✅ | Freemium | Freemium | Freemium | Freemium |
 | **Artifacts / side panel** | ✅ | ✅ Canvas | ✅ Artifacts | ✅ | ❌ |
@@ -113,7 +160,13 @@ When a user describes a situation involving institutional unfairness or automate
 
 ### MemPalace Integration
 
-Iris is aware of the [MemPalace](https://github.com/ljbudgie/mempalace) memory architecture — a local-first, structured memory system for AI with 96.6% recall on LongMemEval benchmarks.
+Iris integrates with [MemPalace](https://github.com/ljbudgie/mempalace) — a local-first, structured memory system for AI with 96.6% recall on LongMemEval benchmarks. The integration uses **MCP JSON-RPC over stdio** and exposes three tools to the AI model:
+
+- **`mempalaceSearch`** — semantic search across palace memories with similarity scores
+- **`mempalaceStore`** — store verbatim content in the palace (never summarised)
+- **`mempalaceStatus`** — palace overview (total memories, wings, rooms) for wake-up context
+
+These tools are **conditionally registered** — they only appear in the skill registry when the `MEMPALACE_MCP_COMMAND` environment variable is set. See [`lib/mempalace/`](lib/mempalace/) for the client and tool definitions.
 
 ---
 
