@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
   ...(basePath
     ? {
         basePath,
-        assetPrefix: "/demo-assets",
         redirects: async () => [
           {
             source: "/",
