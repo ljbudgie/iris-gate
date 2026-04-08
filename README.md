@@ -4,73 +4,106 @@
   <a href="https://iris-gate.vercel.app"><img src="https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel" alt="Deployed on Vercel" /></a>
 </p>
 
+<h1 align="center">Iris ✨</h1>
+
+<p align="center"><strong>The open-source AI assistant that puts people first.</strong></p>
+
+<p align="center">
+  Built on <a href="https://github.com/ljbudgie/burgess-principle">The Burgess Principle</a> — human-first governance, multi-model routing, and one beautiful interface.<br/>
+  8 models · 5 providers · 18 letter templates · zero friction.
+</p>
+
 <p align="center">
   <a href="https://iris-gate.vercel.app">
-    <img src="https://img.shields.io/badge/Try_it_live_%E2%86%92-7c3aed?style=for-the-badge" alt="Try it live →" />
+    <img src="https://img.shields.io/badge/Try_Iris_live_%E2%86%92-7c3aed?style=for-the-badge" alt="Try Iris live →" />
   </a>
 </p>
 
-<h1 align="center">Iris</h1>
-
-<p align="center"><strong>An open-source AI assistant built on <a href="https://github.com/ljbudgie/burgess-principle">The Burgess Principle</a> — human-first governance, multi-model routing, one beautiful interface.</strong></p>
+> **Origin** — Iris was built in a single day on a 2022 iPhone by someone who only discovered GitHub in January 2026. You don't need a fancy setup — just the Burgess Principle spirit and a dream.
 
 <p align="center">
-  Iris routes your requests across the best AI models available while ensuring every automated output is flagged for human review.<br/>
-  Pick a model or let Iris choose for you. Fast responses, clean UI, built-in safeguards.
-</p>
-
-> **Origin Story** — Iris was built in a single day on a 2022 iPhone by someone who only discovered GitHub in January 2026. Proof that you don't need a fancy setup — just the Burgess Principle spirit and a dream.
-
-<p align="center">
-  <a href="#hi-im-iris-"><strong>Meet Iris</strong></a> ·
+  <a href="#meet-iris"><strong>Meet Iris</strong></a> ·
   <a href="#-features"><strong>Features</strong></a> ·
+  <a href="#-getting-started"><strong>Getting Started</strong></a> ·
   <a href="#-skills--tools"><strong>Skills</strong></a> ·
-  <a href="#-how-iris-compares"><strong>Compare</strong></a> ·
   <a href="#-the-burgess-principle"><strong>Burgess Principle</strong></a> ·
   <a href="#-model-lineup"><strong>Models</strong></a> ·
+  <a href="#-how-iris-compares"><strong>Compare</strong></a> ·
+  <a href="#-architecture"><strong>Architecture</strong></a> ·
   <a href="#-deploy-your-own"><strong>Deploy</strong></a> ·
   <a href="#-running-locally"><strong>Run Locally</strong></a>
 </p>
-<br/>
 
 ---
 
-## Hi, I'm Iris ✨
+## Meet Iris
 
-> I connect you to the most powerful AI models and ensure a real person can always review what matters.
-> Which model would you like to start with?
+> *Your thoughtful AI companion, guided by human-centred values. Ask a question, get help with a dispute, or explore your rights.*
 
-When you open Iris, you're greeted with a friendly onboarding step — clickable buttons for every model in the lineup, plus a **"Dismiss — use smart default"** option that picks the best model and drops you straight into chatting. No config screens, no API key juggling, no friction.
+Iris greets you with a **guided onboarding flow** — pick a common situation (benefits dispute, bailiff visit, automated decision, data access request) or jump straight into chatting. No config screens, no API key juggling, no friction.
 
-Once you pick a model (or let Iris decide), you get the full experience: streaming responses, side-panel artifacts for documents and code, Burgess Principle letter generation, an extensible skill registry with governance-aware filtering, and a polished dark-mode UI that feels premium from the first click.
+Behind the scenes Iris routes your request to the best available model, generates streaming responses, opens documents and code in a **side-panel artifact viewer**, and can produce personalised **Burgess Principle letters** to help you challenge institutions that forgot to involve a human.
+
+### What makes Iris different
+
+| | |
+|---|---|
+| 🛡️ **Human-first governance** | Every AI output is flagged for human review via the SOVEREIGN/NULL gate |
+| 📝 **Advocacy tools** | 18 letter templates for benefits disputes, bailiff visits, data access, and more |
+| 🧠 **Multi-model intelligence** | 8 models across 5 providers with automatic failover — pick one or let Iris decide |
+| 🎤 **Voice input** | Speak your request — Iris transcribes and responds naturally |
+| 🧭 **Guided intake** | One-tap situation categories so vulnerable users aren't staring at a blank prompt |
+| ⌨️ **Slash commands** | Type `/` for quick actions: new chat, clear, style changes, and more |
+| 🌍 **Country-aware** | Geolocation selects the right legal framework (UK, US, EU, AU, CA) automatically |
 
 ---
 
 ## ⚡ Features
 
-- **🧠 Intelligent multi-model routing** — 8 models across 5 providers with automatic failover via [Vercel AI Gateway](https://vercel.com/docs/ai-gateway)
-- **⚖️ Burgess Principle governance** — SOVEREIGN/NULL gate ensures every AI output is flagged for human review before reaching vulnerable users ([learn more](#-the-burgess-principle))
-- **📝 Burgess Principle letters** — 18 personalised letter templates for challenging automated decisions, requesting data access, and asserting your rights
-- **🔍 Human-impact scanner** — Flags changes across 7 areas (accessibility, privacy, security, user language, billing, automated decisions, deployment) for human review
-- **🧩 Extensible skill registry** — Self-declaring tools with metadata, governance-aware filtering, and a factory pattern for context-dependent skills ([learn more](#-skills--tools))
+### Core
+
+- **🧠 Multi-model routing** — 8 models across 5 providers with automatic failover via [Vercel AI Gateway](https://vercel.com/docs/ai-gateway)
+- **⚖️ Burgess Principle governance** — SOVEREIGN/NULL gate ensures every AI output is flagged for human review ([learn more](#-the-burgess-principle))
+- **📝 Letter generation** — 18 personalised templates for challenging automated decisions, requesting data access, and asserting your rights
+- **🔍 Human-impact scanner** — Flags changes across 7 areas (accessibility, privacy, security, user language, billing, automated decisions, deployment)
+
+### Experience
+
+- **🧭 Guided intake** — Situation-aware onboarding cards (benefits, bailiffs, automated decisions, council tax, data access) so users aren't staring at a blank chat
 - **💬 Follow-up suggestions** — AI-generated follow-up questions after each response to keep the conversation flowing
-- **🧠 MemPalace memory** — Optional [MemPalace](https://github.com/ljbudgie/mempalace) integration with 3 MCP tools (search, store, status) for persistent, structured AI memory
-- **📊 Audit trail** — Per-turn logging of model usage, token consumption, tools invoked, and governance status
-- **💰 Conversation budgets** — Per-chat turn and token limits to prevent cost overruns (guest: 20 turns / 50K tokens, registered: 80 turns / 200K tokens)
-- **🎨 Beautiful UI** — Custom violet accent palette, spring animations, dark mode, built with [shadcn/ui](https://ui.shadcn.com) + [Tailwind CSS](https://tailwindcss.com) + [Radix UI](https://radix-ui.com)
-- **⚙️ Next.js App Router** — React Server Components, Server Actions, seamless navigation
-- **🤖 [Vercel AI SDK](https://ai-sdk.dev)** — Unified API for text generation, structured objects, and tool calls
-- **📄 Artifacts** — Documents, code, and spreadsheets render in a side panel for easy review and editing
-- **💾 Data persistence** — [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for chat history, [Vercel Blob](https://vercel.com/storage/blob) for file storage, [Redis](https://redis.io) for rate limiting
-- **🌍 Country-aware legal guidance** — Geolocation-based selection of the right legal framework (UK GDPR, US CCPA/ADA, EU GDPR, AU Privacy Act, CA PIPEDA)
+- **🎤 Voice input** — Browser-native speech recognition for hands-free interaction
+- **⌨️ Slash commands** — Type `/` for quick actions (new chat, clear, style, and more)
+- **📄 Artifacts** — Documents, code, and spreadsheets render in a side panel with versioning, diffs, and one-click restore
+- **🎨 Beautiful UI** — Custom violet accent palette, spring animations, dark mode — built with [shadcn/ui](https://ui.shadcn.com), [Tailwind CSS](https://tailwindcss.com), and [Radix UI](https://radix-ui.com)
+
+### Platform
+
+- **🧩 Extensible skill registry** — Self-declaring tools with metadata, governance-aware filtering, and a factory pattern for context-dependent skills ([learn more](#-skills--tools))
+- **🧠 MemPalace memory** — Optional [MemPalace](https://github.com/ljbudgie/mempalace) integration via MCP for persistent, structured AI memory (96.6% recall on LongMemEval)
+- **📊 Audit trail** — Per-turn logging of model, tokens, tools invoked, and governance status
+- **💰 Conversation budgets** — Per-chat turn and token limits (guest: 20 turns / 50K tokens, registered: 80 turns / 200K tokens)
+- **🌍 Country-aware legal guidance** — Geolocation-based selection of UK GDPR, US CCPA/ADA, EU GDPR, AU Privacy Act, or CA PIPEDA
+- **💾 Data persistence** — [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for chat history, [Vercel Blob](https://vercel.com/storage/blob) for files, [Redis](https://redis.io) for rate limiting
 - **🔐 Auth.js** — Credential and guest authentication with tiered rate limits
-- **🚀 One-click deploy** — Get your own Iris instance running on Vercel in minutes
+- **⚙️ Next.js 16 App Router** — React Server Components, Server Actions, React Compiler, Turbopack
+- **🤖 [Vercel AI SDK](https://ai-sdk.dev)** — Unified API for text generation, structured objects, and tool calls
+- **🚀 One-click deploy** — Get your own Iris running on Vercel in minutes
+
+---
+
+## 🚀 Getting Started
+
+The fastest way to try Iris:
+
+1. **[Try it live →](https://iris-gate.vercel.app)** — no account required, guest mode included
+2. **[Deploy your own](#-deploy-your-own)** — one-click Vercel deploy with your own API keys
+3. **[Run locally](#-running-locally)** — full development setup with hot reload
 
 ---
 
 ## 🧩 Skills & Tools
 
-Iris uses a **SkillRegistry** — a self-declaring, governance-aware tool registration layer. Each skill declares its own metadata (name, description, sensitivity, tags, context requirements) so the registry can enforce Burgess Principle governance rules automatically. Skills are defined in [`lib/ai/skills/`](lib/ai/skills/).
+Iris uses a **SkillRegistry** — a self-declaring, governance-aware tool registration layer. Each skill declares its own metadata so the registry can enforce governance rules automatically. Skills are defined in [`lib/ai/skills/`](lib/ai/skills/).
 
 ### Built-in Skills
 
@@ -96,7 +129,7 @@ Skills declare a **sensitivity** level:
 - **`standard`** — safe for use without human review (informational or editorial)
 - **`sensitive`** — produces formal outputs that could materially affect a user's legal or financial situation; requires **SOVEREIGN** governance status
 
-When governance is **NULL**, the registry automatically excludes sensitive skills. When governance is **SOVEREIGN** (or when no governance layer is active), all skills are available. This filtering is handled by [`skillRegistry.buildTools()`](lib/ai/skills/registry.ts) and [`skillRegistry.getPermittedNames()`](lib/ai/skills/registry.ts).
+When governance is **NULL**, the registry automatically excludes sensitive skills. When governance is **SOVEREIGN** (or when no governance layer is active), all skills are available.
 
 ### Extending with Custom Skills
 
@@ -110,18 +143,94 @@ Context-free skills export a pre-built `tool`; skills that need runtime context 
 
 ---
 
+## ⚖️ The Burgess Principle
+
+Iris is built on **[The Burgess Principle](https://github.com/ljbudgie/burgess-principle)** (UK Certification Mark UK00004343685) — a framework that asks one simple question:
+
+> **"Was a human member of the team able to personally review the specific facts of my situation?"**
+
+### How It Works
+
+1. You politely ask an institution whether a real person reviewed the specific details of *your* case.
+2. If they did — great, you have confirmation.
+3. If not — you have a clear written record to follow up on, often combined with statutory rights (DSAR, FOI, Article 22, Equality Act).
+
+### Governance Gate
+
+Every AI response passes through a **SOVEREIGN/NULL gate**. A response is SOVEREIGN only when a human has reviewed the output for this specific user. Everything else is flagged as NULL. Sensitive tools (like Burgess letter generation) are restricted to SOVEREIGN status.
+
+| Status | Meaning | Tool access |
+|--------|---------|-------------|
+| **SOVEREIGN** | A human has reviewed this output | All tools available |
+| **NULL** | No human review has occurred | Sensitive tools filtered out |
+
+### Letter Templates
+
+When a user describes institutional unfairness or automated decisions, Iris generates a personalised letter from one of 18 templates:
+
+| Category | Templates |
+|---|---|
+| **General** | General dispute, Human review request |
+| **Data rights** | DSAR, FOI, GDPR Article 22 |
+| **Disability & equality** | Equality Act, Reasonable adjustments |
+| **Financial** | Benefits (PIP/UC/ESA), Council tax, Bailiffs, Direct debit |
+| **Media & IP** | Media libel, Copyright, Music copyright, Platform moderation |
+| **Technical** | Contract review, Coding agent review, Medical device |
+
+### MemPalace Integration
+
+Iris optionally integrates with [MemPalace](https://github.com/ljbudgie/mempalace) — a local-first, structured memory system for AI with 96.6% recall on LongMemEval. The integration uses **MCP JSON-RPC over stdio** and exposes three tools:
+
+- **`mempalaceSearch`** — semantic search across palace memories with similarity scores
+- **`mempalaceStore`** — store verbatim content in the palace (never summarised)
+- **`mempalaceStatus`** — palace overview (total memories, wings, rooms) for wake-up context
+
+Enable it by setting `MEMPALACE_MCP_COMMAND` in your environment. See [`lib/mempalace/`](lib/mempalace/) for details.
+
+---
+
+## 🧩 Model Lineup
+
+Iris uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) for multi-provider routing with automatic failover. Models are configured in [`lib/ai/models.ts`](lib/ai/models.ts).
+
+| Model | Provider | Strength | Routed via |
+|---|---|---|---|
+| **DeepSeek V3.2** | DeepSeek | Fast reasoning | Bedrock, DeepInfra |
+| **Codestral** | Mistral | Strong coding | Mistral |
+| **Mistral Small** | Mistral | Vision & speed | Mistral |
+| **Kimi K2 0905** | Moonshot AI | Creative & balanced | Baseten, Fireworks |
+| **Kimi K2.5** | Moonshot AI | Flagship quality | Fireworks, Bedrock |
+| **GPT OSS 20B** | OpenAI | Compact & fast | Groq, Bedrock |
+| **GPT OSS 120B** | OpenAI | Deep analysis | Fireworks, Bedrock |
+| **Grok 4.1 Fast** *(featured)* | xAI | Ultra-fast chat | xAI |
+
+5 of the 8 models have multi-provider failover — if one provider is slow or down, Iris automatically tries the next. You never notice.
+
+> **Default** (`DEFAULT_CHAT_MODEL`) is Kimi K2 0905 — used when no model is selected. **Featured** (`FEATURED_MODEL_ID`) is Grok 4.1 Fast — highlighted in the onboarding UI. Both are configurable in [`lib/ai/models.ts`](lib/ai/models.ts) and [`lib/constants.ts`](lib/constants.ts).
+
+> 💡 With the [AI SDK](https://ai-sdk.dev/providers/ai-sdk-providers) you can swap in additional providers like Anthropic, Cohere, and more — just update [`lib/ai/models.ts`](lib/ai/models.ts).
+
+### AI Gateway Authentication
+
+- **Vercel deployments** — authentication is handled automatically via OIDC tokens.
+- **Non-Vercel deployments** — set the `AI_GATEWAY_API_KEY` environment variable in your `.env.local` file.
+
+---
+
 ## 🆚 How Iris Compares
 
-Most AI chatbots are wrappers around a single model focused on general productivity. Iris is purpose-built for **advocacy, accountability, and user protection**. Here's how it stacks up:
+Most AI chatbots are wrappers around a single model focused on general productivity. Iris is purpose-built for **advocacy, accountability, and user protection**.
 
 | Feature | Iris | ChatGPT | Claude | Gemini | Copilot |
 |---|:---:|:---:|:---:|:---:|:---:|
 | **Open source** | ✅ [MIT + BP](LICENSE) | ❌ | ❌ | ❌ | ❌ |
 | **Multi-model routing** | ✅ 8 models | ❌ Single | ❌ Single | ❌ Single | ❌ Single |
-| **Automatic provider failover** | ✅ 5 providers | ❌ | ❌ | ❌ | ❌ |
-| **Human-review governance gate** | ✅ SOVEREIGN/NULL | ❌ | ❌ | ❌ | ❌ |
+| **Automatic failover** | ✅ 5 providers | ❌ | ❌ | ❌ | ❌ |
+| **Human-review governance** | ✅ SOVEREIGN/NULL | ❌ | ❌ | ❌ | ❌ |
 | **Legal letter generation** | ✅ 18 templates | ❌ | ❌ | ❌ | ❌ |
 | **Human-impact scanner** | ✅ 7 areas | ❌ | ❌ | ❌ | ❌ |
+| **Guided intake** | ✅ 6 categories | ❌ | ❌ | ❌ | ❌ |
+| **Voice input** | ✅ | ✅ | ❌ | ✅ | ❌ |
 | **Per-turn audit trail** | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Conversation budgets** | ✅ | ❌ | ❌ | ❌ | ❌ |
 | **Country-aware legal guidance** | ✅ 5 jurisdictions | ❌ | ❌ | ❌ | ❌ |
@@ -135,64 +244,53 @@ Most AI chatbots are wrappers around a single model focused on general productiv
 
 ---
 
-## ⚖️ The Burgess Principle
+## 🏗 Architecture
 
-Iris is built on **[The Burgess Principle](https://github.com/ljbudgie/burgess-principle)** (UK Certification Mark UK00004343685) — a framework that asks one simple question:
+```
+User
+ │
+ ├─ Guided Intake / Suggested Actions / Voice Input / Slash Commands
+ │
+ ▼
+┌──────────────────────────────────────────────────────────┐
+│  Next.js 16 App Router (React Server Components)         │
+│                                                          │
+│  Auth (next-auth) → Rate Limiting (Redis) → Budget Check │
+│         │                                                │
+│         ▼                                                │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │            Skill Registry (10 tools)               │  │
+│  │  standard: weather, documents, follow-ups, memory  │  │
+│  │  sensitive: Burgess letter (SOVEREIGN only)        │  │
+│  └──────────────────────┬─────────────────────────────┘  │
+│                         │                                │
+│                         ▼                                │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │         Governance Gate (SOVEREIGN / NULL)          │  │
+│  └──────────────────────┬─────────────────────────────┘  │
+│                         │                                │
+│                         ▼                                │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │     Vercel AI SDK → AI Gateway (8 models)          │  │
+│  │     Multi-provider routing + auto failover         │  │
+│  └──────────────────────┬─────────────────────────────┘  │
+│                         │                                │
+│                         ▼                                │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │  Audit Trail (Neon Postgres)                       │  │
+│  │  model · tokens · tools · governance status        │  │
+│  └────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+         │
+         │ (optional)
+         ▼
+┌──────────────────────────────────────────────────────────┐
+│  MemPalace MCP Server (JSON-RPC over stdio)              │
+│  https://github.com/ljbudgie/mempalace                   │
+└──────────────────────────────────────────────────────────┘
+```
 
-> **"Was a human member of the team able to personally review the specific facts of my situation?"**
-
-### Governance Gate
-
-Every AI response passes through a **SOVEREIGN/NULL gate** before reaching the user. A response is SOVEREIGN only when a human has reviewed the output for this specific user. Everything else is flagged as NULL and queued for human review. Sensitive tools (like Burgess letter generation) are restricted to SOVEREIGN status.
-
-### Letter Templates
-
-When a user describes a situation involving institutional unfairness or automated decisions, Iris can generate a personalised letter using one of 18 templates:
-
-| Category | Templates |
-|---|---|
-| **General** | General dispute, Human review request |
-| **Data rights** | DSAR, FOI, GDPR Article 22 |
-| **Disability & equality** | Equality Act, Reasonable adjustments |
-| **Financial** | Benefits (PIP/UC/ESA), Council tax, Bailiffs, Direct debit |
-| **Media & IP** | Media libel, Copyright, Music copyright, Platform moderation |
-| **Technical** | Contract review, Coding agent review, Medical device |
-
-### MemPalace Integration
-
-Iris integrates with [MemPalace](https://github.com/ljbudgie/mempalace) — a local-first, structured memory system for AI with 96.6% recall on LongMemEval benchmarks. The integration uses **MCP JSON-RPC over stdio** and exposes three tools to the AI model:
-
-- **`mempalaceSearch`** — semantic search across palace memories with similarity scores
-- **`mempalaceStore`** — store verbatim content in the palace (never summarised)
-- **`mempalaceStatus`** — palace overview (total memories, wings, rooms) for wake-up context
-
-These tools are **conditionally registered** — they only appear in the skill registry when the `MEMPALACE_MCP_COMMAND` environment variable is set. See [`lib/mempalace/`](lib/mempalace/) for the client and tool definitions.
-
----
-
-## 🧩 Model Lineup
-
-Iris uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) to route across multiple providers with automatic failover. Models are configured in [`lib/ai/models.ts`](lib/ai/models.ts).
-
-| Model | Provider | Routed via |
-|---|---|---|
-| **DeepSeek V3.2** | DeepSeek | Bedrock, DeepInfra |
-| **Codestral** | Mistral | Mistral |
-| **Mistral Small** | Mistral | Mistral |
-| **Kimi K2 0905** *(default)* | Moonshot AI | Baseten, Fireworks |
-| **Kimi K2.5** | Moonshot AI | Fireworks, Bedrock |
-| **GPT OSS 20B** | OpenAI | Groq, Bedrock |
-| **GPT OSS 120B** | OpenAI | Fireworks, Bedrock |
-| **Grok 4.1 Fast** | xAI | xAI |
-
-5 of the 8 models have multi-provider failover — if one provider is slow or down, Iris automatically tries the next one. You never notice.
-
-> 💡 With the [AI SDK](https://ai-sdk.dev/providers/ai-sdk-providers) you can swap in additional providers like OpenAI, Anthropic, Cohere, and more — just update [`lib/ai/models.ts`](lib/ai/models.ts).
-
-### AI Gateway Authentication
-
-- **Vercel deployments** — authentication is handled automatically via OIDC tokens.
-- **Non-Vercel deployments** — set the `AI_GATEWAY_API_KEY` environment variable in your `.env.local` file.
+For a detailed breakdown of every component, see [`docs/integration.md`](docs/integration.md).
 
 ---
 
@@ -209,7 +307,7 @@ This button:
 
 After deployment, add your API keys (for Grok, Kimi, DeepSeek, etc.) in the Vercel dashboard under **Environment Variables** (see [`.env.example`](.env.example)).
 
-### Manual steps (if you prefer)
+### Manual steps
 
 1. Click **Fork** on this repo (top-right)
 2. Go to [vercel.com](https://vercel.com) and sign in with GitHub
@@ -222,11 +320,12 @@ Your own Iris will be live at `your-username-iris.vercel.app` (or connect a cust
 ### Customisation ideas
 
 Once deployed, you can:
-- Change the default model
-- Update colours and branding
-- Modify the Burgess Principle prompts
+- Change the default or featured model in [`lib/constants.ts`](lib/constants.ts)
+- Update colours and branding in [`app/globals.css`](app/globals.css)
+- Modify the system prompts in [`lib/ai/prompts.ts`](lib/ai/prompts.ts)
 - Add or remove models in [`lib/ai/models.ts`](lib/ai/models.ts)
-- Extend the federation layer
+- Register new skills in [`lib/ai/skills/built-in.ts`](lib/ai/skills/built-in.ts)
+- Extend the federation layer in [`lib/federation/`](lib/federation/)
 
 ---
 
@@ -250,11 +349,22 @@ pnpm dev
 
 Iris will be running at [localhost:3000](http://localhost:3000) 🎉
 
+### Useful commands
+
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start dev server with Turbopack |
+| `pnpm build` | Run migrations + production build |
+| `pnpm check` | Lint with Biome (via ultracite) |
+| `pnpm fix` | Auto-fix lint issues |
+| `pnpm db:studio` | Open Drizzle Studio for the database |
+| `pnpm test` | Run Playwright end-to-end tests |
+
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request. Whether it's a bug fix, new feature, or documentation improvement — all contributions help make Iris better.
+Contributions are welcome! Feel free to open an issue or submit a pull request. Whether it's a bug fix, new feature, or documentation improvement — all contributions help make Iris better for the people who need it most.
 
 ---
 
