@@ -291,7 +291,7 @@ export const generateBurgessLetter = ({
   modelId,
 }: GenerateBurgessLetterProps) =>
   tool({
-    description: `Generate a personalised Burgess Principle letter as a document artifact. Use this when a user describes a situation involving institutional unfairness, automated decisions, enforcement actions, benefits disputes, or feeling unseen by a system. Choose the most appropriate template type based on their situation. Available types: ${templateTypes.join(", ")}`,
+    description: `Generate a personalised Burgess Principle letter as a document artifact. Use this ONLY when the user has provided enough detail to write a meaningful letter — at minimum: the company/institution name, a brief description of what happened, and ideally a reference or account number. If key details are missing, ask for them conversationally BEFORE calling this tool. Choose the most appropriate template type. Available types: ${templateTypes.join(", ")}`,
     inputSchema: z.object({
       templateType: z
         .enum(templateTypes)
