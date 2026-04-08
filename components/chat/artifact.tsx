@@ -287,7 +287,7 @@ function PureArtifact({
   if (!artifact.isVisible && !isMobile) {
     return (
       <div
-        className="h-dvh w-0 shrink-0 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+        className="h-dvh w-0 shrink-0 overflow-hidden transition-[width,flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         data-testid="artifact"
       />
     );
