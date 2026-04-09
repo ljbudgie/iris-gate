@@ -7,9 +7,15 @@
  *
  * This is what no other AI does: the best answer from the best model,
  * with alternatives available.
+ *
+ * PersonGate integration: in consensus mode, all models must respect
+ * PersonGate outputs before finalizing any decision that touches
+ * personal data.  If a PersonGate vault state contains NULL cases,
+ * consensus responses are tagged accordingly and flagged for review.
  */
 
 import { generateText } from "ai";
+import { isPersonalCaseMessage } from "@/lib/person-gate";
 import { chatModels } from "./models";
 import { getLanguageModel } from "./providers";
 
@@ -26,6 +32,8 @@ export type ConsensusResult = {
   primary: ConsensusResponse;
   alternatives: ConsensusResponse[];
   consensusModels: string[];
+  /** Whether this consensus involved personal case data (PersonGate). */
+  personGateActive: boolean;
 };
 
 // ---- Default consensus model set ----
@@ -108,6 +116,7 @@ export async function runConsensus({
     primary,
     alternatives,
     consensusModels: validModelIds,
+    personGateActive: isPersonalCaseMessage(userMessage),
   };
 }
 

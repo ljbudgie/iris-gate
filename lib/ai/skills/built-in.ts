@@ -22,6 +22,11 @@ import {
 } from "@/lib/ai/tools/tool-execution";
 import { updateDocument } from "@/lib/ai/tools/update-document";
 import {
+  personGateCommitSkill,
+  personGateExportSkill,
+  personGateStatusSkill,
+} from "@/lib/ai/tools/person-gate";
+import {
   mempalaceSearchSkill,
   mempalaceStatusSkill,
   mempalaceStoreSkill,
@@ -182,6 +187,20 @@ const builtInSkills: SkillDefinition[] = [
 ];
 
 for (const skill of builtInSkills) {
+  skillRegistry.register(skill);
+}
+
+// ---------------------------------------------------------------------------
+// PersonGate tools — sovereign data handling (always registered as sensitive)
+// ---------------------------------------------------------------------------
+
+const personGateSkills: SkillDefinition[] = [
+  personGateCommitSkill,
+  personGateStatusSkill,
+  personGateExportSkill,
+];
+
+for (const skill of personGateSkills) {
   skillRegistry.register(skill);
 }
 
