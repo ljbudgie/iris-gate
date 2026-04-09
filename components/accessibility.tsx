@@ -182,12 +182,16 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
       el.textContent = message;
       document.body.appendChild(el);
 
-      // Remove after announcement
+      // Remove after announcement — scale delay to message length for screen readers
+      const announcementDelay = Math.max(
+        2000,
+        Math.min(message.length * 80, 10_000)
+      );
       setTimeout(() => {
         if (el.parentNode) {
           el.parentNode.removeChild(el);
         }
-      }, 1000);
+      }, announcementDelay);
     },
     [settings.screenReaderAnnouncements]
   );

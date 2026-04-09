@@ -131,12 +131,16 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     : false;
 
   const allChats = useMemo(() => {
-    if (!paginatedChatHistories) return [];
+    if (!paginatedChatHistories) {
+      return [];
+    }
     return paginatedChatHistories.flatMap((page) => page.chats);
   }, [paginatedChatHistories]);
 
   const filteredChats = useMemo(() => {
-    if (!searchQuery.trim()) return allChats;
+    if (!searchQuery.trim()) {
+      return allChats;
+    }
     const query = searchQuery.toLowerCase();
     return allChats.filter((chat) => chat.title?.toLowerCase().includes(query));
   }, [allChats, searchQuery]);

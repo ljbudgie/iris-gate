@@ -7,9 +7,19 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const rawRedirect = searchParams.get("redirectUrl") || "/";
   const redirectUrl =
-    rawRedirect.startsWith("/") && !rawRedirect.startsWith("//")
+    rawRedirect.startsWith("/") &&
+    !rawRedirect.includes("//") &&
+    !rawRedirect.includes("\\")
       ? rawRedirect
       : "/";
+
+  if (!process.env.AUTH_SECRET) {
+    console.error("AUTH_SECRET environment variable is not set");
+    return NextResponse.json(
+      { error: "Server configuration error" },
+      { status: 500 }
+    );
+  }
 
   const token = await getToken({
     req: request,
