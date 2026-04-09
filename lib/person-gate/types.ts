@@ -109,7 +109,11 @@ export type Challenge = {
   /** The user ID. */
   userId: string;
 
-  /** The commitment that received a NULL response. */
+  /**
+   * A snapshot of the commitment that was sent externally and received a NULL
+   * response. This is a copy (not a reference) to preserve the exact state
+   * at the time of the challenge, even if the vault record is later updated.
+   */
   commitment: Commitment;
 
   /** The NULL receipt that triggered this challenge. */

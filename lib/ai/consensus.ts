@@ -32,8 +32,8 @@ export type ConsensusResult = {
   primary: ConsensusResponse;
   alternatives: ConsensusResponse[];
   consensusModels: string[];
-  /** Whether this consensus involved personal case data (PersonGate). */
-  personGateActive: boolean;
+  /** Whether the user message potentially involves a personal case (PersonGate heuristic). */
+  potentialPersonalCase: boolean;
 };
 
 // ---- Default consensus model set ----
@@ -116,7 +116,7 @@ export async function runConsensus({
     primary,
     alternatives,
     consensusModels: validModelIds,
-    personGateActive: isPersonalCaseMessage(userMessage),
+    potentialPersonalCase: isPersonalCaseMessage(userMessage),
   };
 }
 
