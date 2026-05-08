@@ -28,7 +28,7 @@ export function getOllamaBaseUrl(): string {
  * cannot be served locally and Iris is in local-only mode).
  */
 export function getOllamaDefaultModel(): string {
-  return process.env.OLLAMA_DEFAULT_MODEL ?? "llama3";
+  return process.env.OLLAMA_DEFAULT_MODEL ?? "llama3.2";
 }
 
 /**

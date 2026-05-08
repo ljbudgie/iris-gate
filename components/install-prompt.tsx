@@ -14,6 +14,12 @@ import { useEffect, useState } from "react";
 
 const DISMISS_KEY = "iris.installPrompt.dismissed";
 
+/**
+ * Delay before showing the install sheet — gives the chat a chance to
+ * render and the user to read it before we ask them to install.
+ */
+const INSTALL_PROMPT_DELAY_MS = 12_000;
+
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
@@ -36,7 +42,7 @@ export function InstallPrompt() {
       setEvent(e as BeforeInstallPromptEvent);
       // Delay showing the sheet until the user has had a useful interaction —
       // 12s gives the chat a chance to render and the user to read it.
-      setTimeout(() => setVisible(true), 12_000);
+      setTimeout(() => setVisible(true), INSTALL_PROMPT_DELAY_MS);
     };
 
     window.addEventListener("beforeinstallprompt", handler);

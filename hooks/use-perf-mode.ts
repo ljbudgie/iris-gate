@@ -89,8 +89,21 @@ export function usePerfMode(): PerfMode {
     };
 
     evaluate();
+
+    // Re-evaluate when preferences change (e.g. Calm mode toggled in
+    // the command palette) — no full page reload needed.
+    const onPrefsChange = () => {
+      evaluate();
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("iris:preferences-changed", onPrefsChange);
+    }
+
     return () => {
       cancelled = true;
+      if (typeof window !== "undefined") {
+        window.removeEventListener("iris:preferences-changed", onPrefsChange);
+      }
     };
   }, [reducedMotion]);
 

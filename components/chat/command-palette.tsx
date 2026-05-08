@@ -54,10 +54,10 @@ export function CommandPalette() {
     const next = !calmMode;
     setCalmMode(next);
     writePreferences({ calmMode: next });
-    // Reload so usePerfMode picks it up immediately and decorative layers
-    // are dropped without waiting for the next navigation.
+    // Notify usePerfMode subscribers without a full page reload — they
+    // listen for this event and re-evaluate their decision logic.
     if (typeof window !== "undefined") {
-      window.location.reload();
+      window.dispatchEvent(new Event("iris:preferences-changed"));
     }
   };
 

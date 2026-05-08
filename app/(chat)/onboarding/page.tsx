@@ -40,15 +40,19 @@ export default function OnboardingPage() {
   }, [router]);
 
   // Detect a local Ollama instance to preselect the local provider.
+  // Probed via a server route to avoid the browser CORS limitation.
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch("http://localhost:11434/api/tags", {
-          method: "GET",
-          mode: "no-cors",
-        });
-        if (!cancelled && res) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/onboarding/probe-ollama`
+        );
+        if (!res.ok) {
+          return;
+        }
+        const data = (await res.json()) as { reachable: boolean };
+        if (!cancelled && data.reachable) {
           setOllamaReachable(true);
           setProvider("ollama");
         }
