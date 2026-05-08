@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  BrainIcon,
+  FileTextIcon,
+  ListTodoIcon,
+  ShieldCheckIcon,
+} from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
@@ -73,15 +80,19 @@ export function ChatShell() {
   return (
     <>
       <div
-        className="flex h-dvh w-full flex-row overflow-hidden"
+        className="sovereign-command-centre relative flex h-dvh w-full flex-row overflow-hidden"
         style={{ background: "var(--surface-0)" }}
       >
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="sovereign-glow sovereign-glow-top" />
+          <div className="sovereign-glow sovereign-glow-bottom" />
+          <div className="memory-particles absolute inset-0 opacity-50" />
+        </div>
         <div
           className={cn(
-            "flex min-w-0 flex-1 flex-col transition-[flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            "relative z-10 flex min-w-0 flex-1 flex-col transition-[flex] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
             isArtifactVisible ? "md:max-w-[50%] lg:max-w-[45%]" : "w-full"
           )}
-          style={{ background: "var(--surface-0)" }}
         >
           <ChatHeader
             chatId={chatId}
@@ -117,10 +128,7 @@ export function ChatShell() {
               votes={votes}
             />
 
-            <div
-              className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 px-2 pb-3 md:px-4 md:pb-4"
-              style={{ background: "var(--surface-1)" }}
-            >
+            <div className="sticky bottom-0 z-10 mx-auto flex w-full max-w-4xl gap-2 border-t-0 px-2 pb-3 md:px-4 md:pb-4">
               {!isReadonly && (
                 <MultimodalInput
                   attachments={attachments}
@@ -180,6 +188,24 @@ export function ChatShell() {
           stop={stop}
           votes={votes}
         />
+
+        <nav className="fixed right-3 bottom-24 left-3 z-20 grid grid-cols-4 gap-2 rounded-3xl border border-[rgba(15,118,110,0.24)] bg-[rgba(8,8,12,0.76)] p-2 shadow-[var(--shadow-float)] backdrop-blur-xl md:hidden">
+          {[
+            { href: "/templates", label: "Letters", icon: FileTextIcon },
+            { href: "/memory", label: "Memory", icon: BrainIcon },
+            { href: "/tasks", label: "Tasks", icon: ListTodoIcon },
+            { href: "/audit", label: "Audit", icon: ShieldCheckIcon },
+          ].map(({ href, label, icon: Icon }) => (
+            <Link
+              className="flex flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[10px] text-[#a1a1aa] transition-colors hover:bg-[rgba(15,118,110,0.12)] hover:text-[#ccfbf1]"
+              href={href}
+              key={href}
+            >
+              <Icon className="size-4" />
+              <span>{label}</span>
+            </Link>
+          ))}
+        </nav>
       </div>
 
       <DataStreamHandler />
