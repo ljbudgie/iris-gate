@@ -88,7 +88,11 @@ export async function commitPersonalContext({
   }
 
   try {
-    const mod = (await import("@iris-gate/person")) as PersonGateModule;
+    const dynamicImport = new Function(
+      "specifier",
+      "return import(specifier)"
+    ) as (specifier: string) => Promise<PersonGateModule>;
+    const mod = await dynamicImport("@iris-gate/person");
     const commit = mod.personGate?.commit ?? mod.commit;
     if (commit) {
       const result = await commit(label, facts, allTags);
