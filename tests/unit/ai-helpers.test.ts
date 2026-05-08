@@ -1,9 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
-import {
-  getAllGatewayModels,
-  getCapabilities,
-} from "../../lib/ai/models";
+import { getAllGatewayModels, getCapabilities } from "../../lib/ai/models";
 import { evaluateResponse } from "../../lib/ai/quality-loop";
 import {
   AUTO_MODEL_ID,
@@ -12,10 +9,7 @@ import {
   routeMessage,
 } from "../../lib/ai/smart-router";
 import { buildIrisSystemPrompt } from "../../lib/ai/system-prompt";
-import {
-  detectTemplate,
-  getTemplateInstruction,
-} from "../../lib/ai/templates";
+import { detectTemplate, getTemplateInstruction } from "../../lib/ai/templates";
 
 const originalFetch = globalThis.fetch;
 
@@ -208,7 +202,7 @@ describe("system prompt builder", () => {
 
 describe("model metadata helpers", () => {
   it("returns conservative capabilities when endpoint lookups fail", async () => {
-    globalThis.fetch = async () => {
+    globalThis.fetch = () => {
       throw new Error("network unavailable");
     };
 
